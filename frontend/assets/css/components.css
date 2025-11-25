@@ -1,0 +1,25 @@
+header{
+    min-width: 100dvw;
+    background-color: var(--azul-jandira);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.perfil-icons{
+    display: flex;
+    gap: 8px;
+}
+.logo-icon{
+    border-radius: var(--radius-full);
+}
+
+.gnn-container{
+    background-color: var(--bg-modal);
+    border: var(--defafult-border);
+    border-radius: var(--radius-lg);
+    padding-inline: 32px;
+}
+
+.main-footer{
+    background-color: #05080A;
+}
