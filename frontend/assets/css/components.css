@@ -1,25 +1,121 @@
-header{
-    min-width: 100dvw;
+header {
+    width: 100%;
     background-color: var(--azul-jandira);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding-inline: 16px;
     align-items: center;
+    flex-wrap: nowrap;
+    height: 60px;
 }
-.perfil-icons{
+
+header img{
+    width: auto;
+    height: 44px;
+}
+
+.titulo{
+    font-size: 24px;
+}
+
+.perfil-icons {
     display: flex;
-    gap: 8px;
+    gap: 12px;
 }
-.logo-icon{
+
+.logo-icon {
     border-radius: var(--radius-full);
 }
 
-.gnn-container{
+.gnn-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
     background-color: var(--bg-modal);
     border: var(--defafult-border);
-    border-radius: var(--radius-lg);
-    padding-inline: 32px;
+    border-radius: var(--radius-md);
+    padding-inline: 16px;
+    padding-block: 4px;
+    white-space: nowrap;
+    max-width: 218px;
 }
 
-.main-footer{
+.menu-icons{
+    display: flex;
+    gap: 8px;
+}
+
+.main-footer {
     background-color: #05080A;
+    display: flex;
+    flex-direction: column;
+    padding-block: var(--default-padding);
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    gap: 8px;
+}
+
+.footer-subtitle{
+    color: var(--amarelo-ouro);
+    padding-block: var(--padding-md);
+}
+
+.footer-section {
+    border-bottom: var(--defafult-border);
+    padding-bottom: var(--padding-md);
+    padding-left: var(--default-padding);
+    width: 100%;
+    gap: 16px;
+}
+
+.footer-section:last-of-type{
+    border-bottom: none;
+}
+
+.desenvolvedor{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-block: var(--padding-sm);
+}
+
+.dev-icons{
+    display: flex;
+    gap: 8px;
+}
+
+.dev-links{
+    display: flex;
+    gap: 8px;
+}
+
+.footer-copy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
+    gap: 8px;
+}
+
+@media (max-width: 390px) {
+    
+    .titulo {
+        font-size: 16px; 
+    }
+
+    .gnn-container {
+        padding-inline: 8px; 
+        max-width: none; 
+    }
+
+    .perfil-icons, .menu-icons {
+        gap: 4px; 
+    }
+
+    header {
+        padding-inline: 8px; 
+    }
 }

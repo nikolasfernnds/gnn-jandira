@@ -101,7 +101,7 @@ function createFooter() {
 
     desenvolvedores.forEach(dev => {
         const devContainer = document.createElement('div')
-        devContainer.classList.add('dev-item')
+        devContainer.classList.add('desenvolvedor')
 
         const devName = document.createElement('p')
         devName.classList.add('dev-name')
@@ -115,6 +115,7 @@ function createFooter() {
         iconsContainer.classList.add('dev-icons')
 
         const linkGit = document.createElement('a')
+        linkGit.classList.add('dev-links')
         linkGit.href = dev.github
         linkGit.target = '_blank'
 
@@ -122,9 +123,14 @@ function createFooter() {
         iconGit.src = '../../assets/img/github-icon.svg'
         iconGit.alt = 'GitHub'
 
+        const textGit = document.createElement('span')
+        textGit.textContent = 'GitHub'
+
         linkGit.appendChild(iconGit)
+        linkGit.appendChild(textGit)
 
         const linkIn = document.createElement('a')
+        linkIn.classList.add('dev-links')
         linkIn.href = dev.linkedin
         linkIn.target = '_blank'
 
