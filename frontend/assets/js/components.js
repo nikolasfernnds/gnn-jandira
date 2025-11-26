@@ -86,14 +86,14 @@ function createFooter() {
         {
             nome: 'Nicolas Durão',
             funcao: 'Back-end & API',
-            github: 'link-git-2',
-            linkedin: 'link-in-2'
+            github: 'https://github.com/nicolas16-sd',
+            linkedin: 'https://www.linkedin.com/in/nicolas-durao/'
         },
         {
             nome: 'Nikolas Fernandes',
             funcao: 'Database & DevOps',
-            github: 'link-git-3',
-            linkedin: 'link-in-3'
+            github: 'https://github.com/nikolasfernnds',
+            linkedin: 'https://www.linkedin.com/in/nikolasfernnds/'
         }
     ]
 
