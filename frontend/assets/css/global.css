@@ -22,7 +22,7 @@
             #16212B 0%,
             rgba(22, 33, 43, 0.95) 40%,
             rgba(22, 33, 43, 0.95) 100%);
-    
+
     --default-shadow: 0px 4px 12px #40000000;
 
 
@@ -59,6 +59,9 @@ body {
     width: 100dvw;
     height: 100vh;
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 a {
