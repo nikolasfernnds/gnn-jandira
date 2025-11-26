@@ -1,0 +1,135 @@
+openapi: 3.0.0
+info:
+  title: API de Ocorrências
+  description: API REST criada para gerenciar ocorrências da cidade de Jandira
+  version: 1.0.0
+  contact:
+    name: Nicolas dos Santos
+    linkedin: www.linkedin.com/in/nicolas-durao
+
+    name: Nikolas Fernandes
+    linkedin: https://www.linkedin.com/in/nikolasfernnds/
+
+    name: Gabryel Fillipe
+    linkedin: https://www.linkedin.com/in/gabryel-fillipe/
+
+  servers:
+    url: 
+
+paths: 
+  /users:
+    get:
+      tags:
+        - Usuários
+      summary: Lista todos os usuários
+      responses:
+        '200':
+          description: Lista de todos os usuários retornada com sucesso
+        '500':
+          description: Erro interno do servidor
+
+  /users/{id}:
+    get:
+      tags:
+        - Usuários
+      summary: Lista todos os dados de um usuário filtrando pelo seu Id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200': 
+          description: Usuário encontrado
+        '404':
+          description: Usuário não encontrado
+        '500': 
+          description: Erro interno do servidor
+
+    put:
+      tags:
+        - Usuários
+      summary: Atualiza o perfil de um Usuário
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+             $ref: '#/components/schemas/Usuários'
+      responses:
+        '201':
+          description: Usuário atualizado com sucesso
+        '404':
+          description: Usuário não encontrado
+        '500': 
+          description: Erro interno do servidor
+        '400':
+          description: Os campos obrigatórios devem ser preenchidos
+        '415': O tipo de dados do corpo deve ser JSON
+
+    delete:
+      tags:
+       - Usuários
+      summary: Exclui um usuário pelo Id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses: 
+        '201':
+          description: Usuário excluído com sucesso
+        '404':
+          description: Usuário não encontrado
+        '500':
+          description: Erro interno do servidor
+
+  /users/auth/register:
+    post:
+      tags:
+        - Usuários
+      summary: Cadastra um novo usuário 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+            $ref: '#componentes/schemas/Usuários'
+      responses: 
+        '201':
+          description: Usuário cadastrado com sucesso
+        '500':
+          description: Erro interno do servidor
+        '400':
+          description: Os campos obrigatórios devem ser preenchidos
+        '415':
+          description: O tipo de dados do corpo deve ser JSON
+
+  /users/auth/login:
+    post:
+      tags: 
+        - Usuários
+      summary: Valida as credenciais do Usuário
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema:
+            $ref: '#/components/schemas/Usuários'
+      responses: 
+        '201':
+          description: Usuário cadastrado com sucesso
+        '500':
+          description: Erro interno do servidor
+        '400':
+          description: Os campos obrigatórios devem ser preenchidos
+        '415':
+          description: O tipo de dados do corpo deve ser JSON
