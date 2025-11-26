@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+:root {
+    --azul-jandira: #0077B6;
+    --primary-color: #0E1921;
+    --amarelo-ouro: #FFC107;
+    --amarelo-favo: #C4A13E;
+    --bg-color: #16212B;
+    --bg-body: #0E1921;
+    --default-gradient: linear-gradient(90deg, rgba(22, 33, 43, 0.95) 50%, rgba(25, 41, 57, 0.95) 50%);
+    --bg-modal: #16212B;
+    --bg-input: rgba(0, 0, 0, 0.3);
+
+    --text-white: #ffffff;
+    --text-gray: #b0b0b0;
+    --text-black: #121212;
+
+    --status-verde: #2E7D32;
+    --status-amarelo: #FBC02D;
+    --status-vermelho: #C62828;
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    --radius-full: 50%;
+
+    --default-padding: 24px;
+    --padding-md: 16px;
+    --padding-sm: 8px;
+
+    --defafult-border: 1px solid var(--amarelo-favo);
+}
+
+body {
+    background-image: url('../../assets//img/backgroundImage.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: var(--bg-body);
+    color: var(--text-white);
+    width: 100dvw;
+    height: 100vh;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-white);
+}
