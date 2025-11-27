@@ -12,6 +12,7 @@
     --primary-color: #0E1921;
     --amarelo-ouro: #FFC107;
     --amarelo-favo: #C4A13E;
+    --preto-transparente: #40000000;
     --bg-color: #16212B;
     --bg-body: #0E1921;
     --bg-modal: #16212B;
@@ -44,7 +45,7 @@
     --padding-md: 16px;
     --padding-sm: 8px;
 
-    --default-border: 1px solid var(--amarelo-favo);
+    --default-border: 2px solid var(--amarelo-favo);
     --modal-border: 2px solid var(--amarelo-ouro);
 }
 
