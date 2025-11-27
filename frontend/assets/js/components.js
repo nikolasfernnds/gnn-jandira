@@ -1,8 +1,117 @@
 'use strict'
 
-function createHeader() {
+const DEVELOPERS_DATA = [
+    {
+        nome: 'Gabryel Fillipe',
+        funcao: 'Front-end & UI Design',
+        github: 'https://github.com/GabryelFillipe',
+        linkedin: 'https://www.linkedin.com/in/gabryel-fillipe/'
+    },
+    {
+        nome: 'Nicolas Durão',
+        funcao: 'Back-end & API',
+        github: 'https://github.com/nicolas16-sd',
+        linkedin: 'https://www.linkedin.com/in/nicolas-durao/'
+    },
+    {
+        nome: 'Nikolas Fernandes',
+        funcao: 'Database & DevOps',
+        github: 'https://github.com/nikolasfernnds',
+        linkedin: 'https://www.linkedin.com/in/nikolasfernnds/'
+    }
+]
 
-    const header = document.getElementById('header')
+const LINKS = [
+    { text: 'Início', href: '../../pages/home/index.html' },
+    { text: 'Notícias', href: '../../pages/home/index.html#noticias' },
+    { text: 'Ocorrências', href: '../../pages/ocorrencias/index.html' },
+    { text: 'Perfil', href: '../../pages/perfil/index.html' },
+    { text: 'Sair', href: '../../pages/login/index.html', style: 'color: var(--status-vermelho)' }
+]
+
+function toggleNavbar() {
+    const existingNavbar = document.getElementById('navbar')
+
+    if (existingNavbar) {
+        existingNavbar.remove()
+        return
+    }
+
+    const nav = document.createElement('nav')
+    nav.id = 'navbar'
+    nav.classList.add('sidebar-menu') 
+
+    const menuHeader = document.createElement('div')
+    menuHeader.classList.add('menu-header')
+
+    const userInfo = document.createElement('div')
+    userInfo.classList.add('menu-user-info')
+
+    const userImg = document.createElement('img')
+    userImg.src = '../../assets/img/profile.svg'
+    userImg.classList.add('menu-avatar')
+
+    const userName = document.createElement('span')
+    userName.textContent = 'Olá, Usuário'
+    userName.classList.add('menu-username')
+
+    userInfo.appendChild(userImg)
+    userInfo.appendChild(userName)
+
+    const btnClose = document.createElement('button')
+    btnClose.textContent = '✖'
+    btnClose.classList.add('btn-close-menu')
+    btnClose.addEventListener('click', toggleNavbar) 
+
+    menuHeader.appendChild(userInfo)
+    menuHeader.appendChild(btnClose)
+
+    const ul = document.createElement('ul')
+    ul.classList.add('menu-list')
+
+    LINKS.forEach(item => {
+        const li = document.createElement('li')
+        const a = document.createElement('a')
+        
+        a.textContent = item.text
+        a.href = item.href
+        a.classList.add('menu-link')
+        
+        if (item.style) {
+            a.style = item.style
+        }
+
+        li.appendChild(a)
+        ul.appendChild(li)
+    })
+
+    nav.appendChild(menuHeader)
+    nav.appendChild(ul)
+
+    document.body.appendChild(nav)
+}
+
+function createLink(href, iconSrc, text) {
+    const link = document.createElement('a')
+    link.classList.add('dev-links')
+    link.href = href
+    link.target = '_blank'
+
+    const icon = document.createElement('img')
+    icon.src = iconSrc
+    icon.alt = text
+
+    const span = document.createElement('span')
+    span.textContent = text
+
+    link.appendChild(icon)
+    link.appendChild(span)
+
+    return link
+}
+
+function createHeader() {
+    const header = document.getElementById('header') 
 
     const perfilIcons = document.createElement('div')
     perfilIcons.classList.add('perfil-icons')
@@ -34,6 +143,10 @@ function createHeader() {
     menuImg.classList.add('header-icon')
     menuImg.src = '../../assets/img/menuIcon.png'
 
+    menuImg.style.cursor = 'pointer' 
+    menuImg.addEventListener('click', () => {
+        toggleNavbar()
+    })
 
     perfilIcons.appendChild(gnnLogo)
     perfilIcons.appendChild(profileImg)
@@ -76,28 +189,7 @@ function createFooter() {
 
     sectionDevs.appendChild(titleDevs)
 
-    const desenvolvedores = [
-        {
-            nome: 'Gabryel Fillipe',
-            funcao: 'Front-end & UI Design',
-            github: 'https://github.com/GabryelFillipe',
-            linkedin: 'https://www.linkedin.com/in/gabryel-fillipe/'
-        },
-        {
-            nome: 'Nicolas Durão',
-            funcao: 'Back-end & API',
-            github: 'https://github.com/nicolas16-sd',
-            linkedin: 'https://www.linkedin.com/in/nicolas-durao/'
-        },
-        {
-            nome: 'Nikolas Fernandes',
-            funcao: 'Database & DevOps',
-            github: 'https://github.com/nikolasfernnds',
-            linkedin: 'https://www.linkedin.com/in/nikolasfernnds/'
-        }
-    ]
-
-    desenvolvedores.forEach(dev => {
+    DEVELOPERS_DATA.forEach(dev => {
         const devContainer = document.createElement('div')
         devContainer.classList.add('desenvolvedor')
 
@@ -112,38 +204,8 @@ function createFooter() {
         const iconsContainer = document.createElement('div')
         iconsContainer.classList.add('dev-icons')
 
-        const linkGit = document.createElement('a')
-        linkGit.classList.add('dev-links')
-        linkGit.href = dev.github
-        linkGit.target = '_blank'
-
-        const iconGit = document.createElement('img')
-        iconGit.src = '../../assets/img/github-icon.svg'
-        iconGit.alt = 'GitHub'
-
-        const textGit = document.createElement('span')
-        textGit.textContent = 'GitHub'
-
-        linkGit.appendChild(iconGit)
-        linkGit.appendChild(textGit)
-
-        const linkIn = document.createElement('a')
-        linkIn.classList.add('dev-links')
-        linkIn.href = dev.linkedin
-        linkIn.target = '_blank'
-
-        const iconIn = document.createElement('img')
-        iconIn.src = '../../assets/img/linkedin-icon.svg'
-        iconIn.alt = 'LinkedIn'
-
-        const textIn = document.createElement('span')
-        textIn.textContent = 'LinkedIn'
-
-        linkIn.appendChild(iconIn)
-        linkIn.appendChild(textIn)
-
-        iconsContainer.appendChild(linkGit)
-        iconsContainer.appendChild(linkIn)
+        iconsContainer.appendChild(createLink(dev.github, '../../assets/img/github-icon.svg', 'GitHub'))
+        iconsContainer.appendChild(createLink(dev.linkedin, '../../assets/img/linkedin-icon.svg', 'LinkedIn'))
 
         devContainer.appendChild(devName)
         devContainer.appendChild(devRole)

@@ -166,9 +166,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
 }
 
+.input[type="text"]{
+    color: var(--text-white);
+}
+
 input[type="password"]{
     color: var(--text-white);
 }
+
 .modal-cadastro .password-container{
     width: 80%;
 }
