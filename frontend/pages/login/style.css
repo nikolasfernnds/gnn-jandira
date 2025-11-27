@@ -1,0 +1,202 @@
+main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: var(--modal-border);
+    border-radius: var(--radius-md);
+    width: 90dvw;
+    margin-block: var(--default-padding);
+    min-height: 250px;
+    background: var(--overlay-gradient);
+}
+
+.login-info{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 80%;
+    padding-bottom: var(--padding-sm);
+}
+
+.input{
+    border: var(--default-border);
+    background-color: var(--preto-transparente);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    min-width: 200px;
+    padding-block: var(--padding-sm);
+}
+
+.input::placeholder{
+    color: var(--text-white);
+    font-size: 16px;
+    padding-inline: 12px;
+}
+
+.btn-login{
+    background-color: var(--amarelo-favo);
+    color: var(--text-black);
+    padding-block: var(--padding-sm);
+    font-size: 16px;
+    border-radius: var(--radius-sm);
+    border: none;
+}
+
+.btn-cancelar{
+    color: var(--text-white);
+    border: var(--default-border);
+    background-color: var(--preto-transparente);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    min-width: 100px;
+    padding-block: var(--padding-sm);
+}
+
+.opcoes{
+    text-decoration: underline;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    min-width: 80%;
+    flex-direction: row;
+}
+.main-footer{
+    display: none;
+}
+
+.modal-cadastro-overlay{
+    width: 100%;
+    height: 90%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 1000;
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-cadastro{
+    width: 90%;
+    height: auto;
+    /* position: absolute; */
+    background-color: var(--primary-color);
+    top: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: var(--modal-border);
+    border-radius: var(--radius-md);
+    gap: 16px;
+    padding-block: var(--default-padding);
+
+}
+
+.container-input{
+    width: 90%;
+    display: grid;
+    place-items: center;
+    gap: 8px;
+    height: auto;
+}
+
+.container-botao{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.input-cadastro{
+    min-width: 230px;
+    border: var(--default-border);
+    background-color: var(--preto-transparente);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    padding-block: var(--padding-sm);
+    margin-bottom: 0;
+    height: 32px;
+    color: var(--text-white);
+}
+
+.input-cadastro::placeholder{
+    color: var(--text-white);
+    font-size: 16px;
+    padding-inline: 12px;
+}
+
+.btn-cadastre{
+    background-color: var(--amarelo-favo);
+    color: var(--text-black);
+    padding-block: var(--padding-sm);
+    padding-inline: var(--padding-sm);
+    font-size: 16px;
+    border-radius: var(--radius-sm);
+    border: none;
+}
+
+input[type="date"] {
+    position: relative;
+    color-scheme: dark; 
+    text-align: center; 
+    cursor: pointer;    
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;  
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;  
+    cursor: pointer;
+}
+
+input[type="password"]{
+    color: var(--text-white);
+}
+.modal-cadastro .password-container{
+    width: 80%;
+}
+.password-container {
+    position: relative;
+    max-width: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.btn-eye {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-white);
+    padding: 0;
+    z-index: 10;
+}
+
+.password-container .input{
+    width: 100%;
+    padding-right: 40px; 
+}
+.password-container .input-cadastro{
+    width: 100%;
+    padding-right: 20px; 
+}
