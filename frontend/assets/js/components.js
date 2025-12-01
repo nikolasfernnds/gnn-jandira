@@ -47,15 +47,20 @@ function toggleNavbar() {
     const userInfo = document.createElement('div')
     userInfo.classList.add('menu-user-info')
 
+    const imgContainer = document.createElement('div')
+    imgContainer.classList.add('menu-avatar-container')
+
     const userImg = document.createElement('img')
-    userImg.src = '../../assets/img/profile.svg'
+    userImg.src = '../../assets/img/teste.webp'
     userImg.classList.add('menu-avatar')
+
+    imgContainer.appendChild(userImg)
 
     const userName = document.createElement('span')
     userName.textContent = 'Olá, Usuário'
     userName.classList.add('menu-username')
 
-    userInfo.appendChild(userImg)
+    userInfo.appendChild(imgContainer)
     userInfo.appendChild(userName)
 
     const btnClose = document.createElement('button')

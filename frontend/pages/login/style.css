@@ -90,7 +90,6 @@ main{
 .modal-cadastro{
     width: 90%;
     height: auto;
-    /* position: absolute; */
     background-color: var(--primary-color);
     top: 16px;
     display: flex;
@@ -179,7 +178,7 @@ input[type="password"]{
 }
 .password-container {
     position: relative;
-    max-width: 230px;
+    min-width: 90%;
     display: flex;
     align-items: center;
     justify-content: center; 

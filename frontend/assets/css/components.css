@@ -89,9 +89,22 @@ header img {
     gap: 12px;
 }
 
+.menu-avatar-container {
+    width: 48px;
+    height: 48px;
+    background-color: var(--amarelo-favo);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
 .menu-avatar {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    background-color: var(--primary-color);
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 }
 
 .menu-username {
@@ -278,8 +291,6 @@ header img {
         margin-top: 0px;
         text-align: center;
     }
-    
-    
 }
 
 @media (max-width: 390px) {
