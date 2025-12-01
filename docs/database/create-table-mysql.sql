@@ -156,7 +156,7 @@ CREATE TABLE tbl_notificacao_usuario (
     id_usuario INT NOT NULL,
     lida BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (id_notificacao) REFERENCES tbl_notificacao(id_notificacao),
-    FOREIGN KEY (id_usuario) REFERENCES tbtbl_ocorrencial_usuario(id_usuario)
+    FOREIGN KEY (id_usuario) REFERENCES tbl_usuario(id_usuario)
 );
 
 CREATE TABLE tbl_notificacao_ocorrencia (
