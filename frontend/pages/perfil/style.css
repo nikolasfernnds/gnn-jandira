@@ -1,0 +1,109 @@
+.sessao-perfil {
+    width: 100%;
+    padding-block: var(--default-padding);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container-perfil {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--overlay-gradient), url('../../assets/img/backgroundImage.png');
+    background-size: cover;
+    background-position: center;
+    border: var(--modal-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--default-shadow);
+    padding-block: var(--padding-md);
+}
+
+.foto-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: var(--default-padding);
+    width: 100%;
+}
+
+.container-foto {
+    width: 160px;
+    height: 160px;
+    background-color: var(--amarelo-favo);
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.foto {
+    width: 155px;
+    height: 155px;
+    object-fit: fill;
+    background-color: var(--primary-color);
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+.nome-usuario {
+    color: var(--text-white);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.informacao-usuario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+input {
+    border: var(--default-border);
+    border-radius: var(--radius-md);
+    text-align: center;
+    background-color: var(--preto-transparente);
+    color: var(--text-white);
+}
+
+input::placeholder {
+    color: var(--text-white);
+}
+
+input[type="date"] {
+    position: relative;
+    color-scheme: dark;
+    text-align: center;
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.editar{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding-inline: var(--default-padding);
+    padding-top: var(--padding-sm);
+}
+
+.btn-editar{
+    border: var(--default-border);
+    min-width: 100px;
+    padding-block: 4px;
+    border-radius: var(--radius-md);
+    background-color: var(--preto-transparente);
+    color: var(--text-white);
+}
