@@ -18,26 +18,45 @@
   <section class="sessao-perfil">
     <div class="container-perfil">
       <div class="foto-perfil">
-        <div class="container-foto">
-          <img src="../../assets/img/teste.webp" alt="foto perfil" class="foto">
-        </div>
-        <h2 class="nome-usuario">Nome usuario</h2>
+        <label class="container-foto" id="container-foto-perfil" for="input-foto">
+    <img src="../../assets/img/teste.webp" alt="foto perfil" class="foto" id="img-preview">
+</label>
+
+<input type="file" id="input-foto" accept="image/*" class="hidden" disabled>
       </div>
       <div class="informacao-usuario">
-        <input type="text" placeholder="Nome de usuario">
-        <input type="text" placeholder="Email">
-        <input type="date" placeholder="Data de nascimento">
-        <input type="text" placeholder="CEP">
-        <input type="text" placeholder="Número">
-        <input type="text" placeholder="Endereço">
-        <input type="text" placeholder="Bairro">
-        <input type="text" placeholder="Cidade">
-        <input type="text" placeholder="UF">
+        <input type="text" id="input-nome" placeholder="Nome de usuário" disabled value="Gabryel Fillipe">
+
+        <input type="text" id="input-email" placeholder="Email" disabled value="gabryel@email.com">
+
+        <div class="row-inputs">
+          <input type="date" id="input-nasc" placeholder="Data de nascimento" disabled>
+        </div>
+
+        <div class="row-inputs row-cep-num">
+          <input type="text" id="input-cep" placeholder="CEP" disabled>
+          <input type="text" id="input-numero" placeholder="Número" disabled>
+        </div>
+
+        <input type="text" id="input-endereco" placeholder="Endereço" disabled>
+
+        <div class="row-inputs">
+          <input type="text" id="input-bairro" placeholder="Bairro" disabled>
+          <input type="text" id="input-cidade" placeholder="Cidade" disabled>
+        </div>
+
+        <div class="container-acoes">
+          <div class="editar" id="btn-editar-container">
+            <button class="btn-editar" id="btn-editar">Editar Perfil</button>
+          </div>
+          <div class="acoes-edicao hidden" id="btns-salvar-cancelar">
+            <button class="btn-cancelar" id="btn-cancelar">Cancelar</button>
+            <button class="btn-salvar" id="btn-salvar">Salvar Alterações</button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="editar">
-      <button class="btn-editar"> Editar</button>
-    </div>
+
   </section>
 </body>
 
