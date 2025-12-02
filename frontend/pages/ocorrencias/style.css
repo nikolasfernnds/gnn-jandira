@@ -1,0 +1,299 @@
+main {
+    width: 100%;
+}
+
+.sessao-ocorrencia {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: var(--default-padding);
+    text-align: center;
+}
+
+.titulo-pagina {
+    color: var(--text-white);
+    margin-bottom: 24px;
+    font-size: 24px;
+}
+
+.btn-container {
+    display: flex;
+    gap: 16px;
+    width: 90%;
+    max-width: 600px;
+    margin-bottom: 24px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-tab {
+    display: flex;
+    width: 50%;
+    height: 50%;
+    background-color: var(--preto-transparente);
+    border: var(--default-border);
+    border-radius: var(--radius-md);
+    color: var(--text-white);
+    padding-inline: 4px;
+    padding-block: 4px;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-tab:hover {
+    background-color: var(--amarelo-favo);
+    color: var(--text-black);
+}
+
+.btn-tab.active {
+    background-color: var(--amarelo-favo);
+    color: var(--text-black);
+    border: none;
+}
+
+.lista-ocorrencias {
+    width: 90%;
+    max-width: 600px;
+    max-height: 65dvh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.hidden {
+    display: none;
+}
+
+.card-ocorrencia {
+    display: flex;
+    background-color: var(--bg-ocorrencia);
+    border: var(--default-border);
+    border-radius: var(--radius-md);
+    position: relative;
+    overflow: hidden;
+    filter: drop-shadow(var(--ocorrencia-shadow));
+    padding-inline: var(--padding-sm);
+    padding-block: var(--padding-sm);
+    flex-shrink: 0;
+}
+
+.status-indicator {
+    width: 6px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.status-verde {
+    background-color: var(--status-verde);
+}
+
+.status-amarelo {
+    background-color: var(--status-amarelo);
+}
+
+.status-vermelho {
+    background-color: var(--status-vermelho);
+}
+
+.card-content {
+    margin-left: 12px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--amarelo-favo);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.card-date {
+    color: var(--text-gray);
+    font-weight: normal;
+}
+
+.card-title {
+    font-size: 16px;
+    color: var(--text-white);
+    margin: 4px 0;
+}
+
+.card-location {
+    font-size: 12px;
+    color: var(--text-gray);
+}
+
+.btn-cadastro {
+    display: flex;
+    justify-content: end;
+    width: 90%;
+}
+
+.btn-nova-ocorrencia {
+    display: flex;
+    background-color: var(--preto-transparente);
+    border: var(--default-border);
+    border-radius: var(--radius-md);
+    color: var(--text-white);
+    padding-inline: 8px;
+    padding-block: 4px;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.modal-overlay {
+    width: 100%;
+    height: 90%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 1000;
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    top: 10%;
+}
+
+.modal-overlay.active {
+    display: flex;
+    pointer-events: auto;
+}
+
+.modal-box {
+    background-color: var(--bg-modal);
+    border: var(--default-border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    color: var(--text-white);
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    color: var(--text-gray);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.preview {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100px;
+    border: 2px dashed var(--amarelo-favo);
+    border-radius: var(--radius-md);
+    margin-bottom: 16px;
+    cursor: pointer;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-gray);
+}
+
+.preview-input {
+    display: none;
+}
+
+.preview-image {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.preview-label {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.input-padrao {
+    width: 100%;
+    background-color: var(--preto-transparente);
+    border: var(--default-border);
+    color: var(--text-white);
+    padding: 10px;
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+    padding-block: var(--padding-sm);
+    text-align: center;
+}
+
+.input-padrao::placeholder {
+    color: var(--text-white);
+}
+
+input[type="date"] {
+    position: relative;
+    color-scheme: dark;
+    text-align: center;
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.row-inputs {
+    display: flex;
+    gap: 12px;
+}
+
+.buttons{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.btn-cadastro-ocorrencia{
+    background-color: var(--amarelo-favo);
+    color: var(--text-black);
+}
+
+.form-footer {
+    display: flex;
+    justify-content: center;
+    align-items: space-between;
+    flex-direction: column;
+    color: var(--text-white);
+}

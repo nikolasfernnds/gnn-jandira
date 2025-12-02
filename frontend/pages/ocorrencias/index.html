@@ -2,19 +2,249 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="../../assets/img/logo-redonda.png">
-    <link rel="stylesheet" href="../../assets/css/global.css">
-    <link rel="stylesheet" href="../../assets/css/components.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../assets/css/global.css" />
+    <link rel="stylesheet" href="../../assets/css/components.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="../../assets/js/components.js" defer type="module"></script>
     <script src="app.js" defer type="module"></script>
-    <title>GNN Jandira - Ocorrências</title>
+    <title>GNN Jandira - Home</title>
 </head>
 
 <body>
     <header id="header"></header>
 
+    <div id="container-navbar" class="container-navbar"></div>
+
+    <main>
+        <section class="sessao-ocorrencia">
+            <h1 class="titulo-pagina">Ocorrências</h1>
+
+            <div class="btn-container">
+                <button class="btn-tab active" id="btn-feed">Feed da Cidade</button>
+                <button class="btn-tab" id="btn-minhas">Minhas Ocorrências</button>
+            </div>
+
+            <div id="view-feed" class="lista-ocorrencias">
+                <article class="card-ocorrencia">
+                    <div class="status-indicator status-amarelo"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-tag">Iluminação</span>
+                            <span class="card-date">Hoje</span>
+                        </div>
+                        <h3 class="card-title">Lâmpada queimada na praça</h3>
+                        <p class="card-location">Centro</p>
+                    </div>
+                </article>
+
+                <article class="card-ocorrencia">
+                    <div class="status-indicator status-verde"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-tag">Via Pública</span>
+                            <span class="card-date">Ontem</span>
+                        </div>
+                        <h3 class="card-title">Buraco tapado na Av. Principal</h3>
+                        <p class="card-location"> Jd. Alvorada</p>
+                    </div>
+                </article>
+
+                <article class="card-ocorrencia">
+                    <div class="status-indicator status-verde"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-tag">Via Pública</span>
+                            <span class="card-date">Ontem</span>
+                        </div>
+                        <h3 class="card-title">Buraco tapado na Av. Principal</h3>
+                        <p class="card-location"> Jd. Alvorada</p>
+                    </div>
+                </article>
+
+                <article class="card-ocorrencia">
+                    <div class="status-indicator status-verde"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-tag">Via Pública</span>
+                            <span class="card-date">Ontem</span>
+                        </div>
+                        <h3 class="card-title">Buraco tapado na Av. Principal</h3>
+                        <p class="card-location"> Jd. Alvorada</p>
+                    </div>
+                </article>
+
+                 <article class="card-ocorrencia">
+                    <div class="status-indicator status-verde"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-tag">Via Pública</span>
+                            <span class="card-date">Ontem</span>
+                        </div>
+                        <h3 class="card-title">Buraco tapado na Av. Principal</h3>
+                        <p class="card-location"> Jd. Alvorada</p>
+                    </div>
+                </article>
+
+                <article class="card-ocorrencia">
+                    <div class="status-indicator status-verde"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-tag">Via Pública</span>
+                            <span class="card-date">Ontem</span>
+                        </div>
+                        <h3 class="card-title">Buraco tapado na Av. Principal</h3>
+                        <p class="card-location"> Jd. Alvorada</p>
+                    </div>
+                </article>
+            </div>
+
+            <div id="view-minhas" class="lista-ocorrencias hidden">
+                <h2 class="subtitulo-secao">Minhas Solicitações</h2>
+
+                <article class="card-ocorrencia">
+                    <div class="status-indicator status-vermelho"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-protocolo">#4023</span>
+                            <span class="card-date">24/11</span>
+                        </div>
+                        <h3 class="card-title">Lixo acumulado na calçada</h3>
+                        <p class="card-location"> Minha Rua</p>
+                    </div>
+                </article>
+
+                <article class="card-ocorrencia">
+                    <div class="status-indicator status-vermelho"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-protocolo">#4023</span>
+                            <span class="card-date">24/11</span>
+                        </div>
+                        <h3 class="card-title">Lixo acumulado na calçada</h3>
+                        <p class="card-location"> Minha Rua</p>
+                    </div>
+                </article>
+
+                <article class="card-ocorrencia">
+                    <div class="status-indicator status-vermelho"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-protocolo">#4023</span>
+                            <span class="card-date">24/11</span>
+                        </div>
+                        <h3 class="card-title">Lixo acumulado na calçada</h3>
+                        <p class="card-location"> Minha Rua</p>
+                    </div>
+                </article>
+
+                <article class="card-ocorrencia">
+                    <div class="status-indicator status-vermelho"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-protocolo">#4023</span>
+                            <span class="card-date">24/11</span>
+                        </div>
+                        <h3 class="card-title">Lixo acumulado na calçada</h3>
+                        <p class="card-location"> Minha Rua</p>
+                    </div>
+                </article>
+
+                <article class="card-ocorrencia">
+                    <div class="status-indicator status-vermelho"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-protocolo">#4023</span>
+                            <span class="card-date">24/11</span>
+                        </div>
+                        <h3 class="card-title">Lixo acumulado na calçada</h3>
+                        <p class="card-location"> Minha Rua</p>
+                    </div>
+                </article>
+
+                <article class="card-ocorrencia">
+                    <div class="status-indicator status-vermelho"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-protocolo">#4023</span>
+                            <span class="card-date">24/11</span>
+                        </div>
+                        <h3 class="card-title">Lixo acumulado na calçada</h3>
+                        <p class="card-location"> Minha Rua</p>
+                    </div>
+                </article>
+
+                <article class="card-ocorrencia">
+                    <div class="status-indicator status-vermelho"></div>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <span class="card-protocolo">#4023</span>
+                            <span class="card-date">24/11</span>
+                        </div>
+                        <h3 class="card-title">Lixo acumulado na calçada</h3>
+                        <p class="card-location"> Minha Rua</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="btn-cadastro">
+
+                <button class="btn-nova-ocorrencia" id="btn-nova-ocorrencia">Cadastrar nova Ocorrência </button>
+            </div>
+
+            <div id="modal-ocorrencia-overlay" class="modal-overlay">
+                <div class="modal-box">
+                    <div class="modal-header">
+                        <h2>Nova Ocorrência</h2>
+                        <button id="btn-fechar-modal" class="btn-close" type="button">✖</button>
+                    </div>
+
+                    <form class="modal-form">
+
+                        <div class="preview">
+                            <input class="preview-input" id="foto" type="file" accept="image/*">
+                            <label class="preview-label" for="foto"></label>
+                            <p>Adicione uma foto</p>
+                        </div>
+
+                        <input type="text" class="input-padrao" placeholder="Título (Ex: Buraco na rua)">
+
+                        <select class="input-padrao">
+                            <option value="" disabled selected>Tipo de Ocorrência...</option>
+                            <option value="iluminacao">Iluminação Pública</option>
+                            <option value="via">Pavimentação / Buraco</option>
+                            <option value="lixo">Limpeza / Lixo</option>
+                            <option value="agua">Água e Esgoto</option>
+                        </select>
+
+                        <div class="row-inputs">
+                            <input type="text" class="input-padrao" placeholder="CEP" style="width: 120px;">
+                            <input type="text" class="input-padrao" placeholder="Número">
+                        </div>
+                        <input type="text" class="input-padrao" placeholder="Endereço (Rua)">
+                        <input type="text" class="input-padrao" placeholder="Ponto de Referência">
+
+                        <input type="date" class="input-padrao">
+
+
+
+                        <div class="form-footer">
+                            <div class="buttons">
+                                <button type="button" class="btn-cancelar btn-tab" id="btn-cancelar">Cancelar</button>
+                                <button type="button" class="btn-cadastro-ocorrencia btn-tab">Registrar</button>
+                            </div>
+                            <label class="checkbox-container">
+                                <input type="checkbox"> Denúncia Anônima
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+    </main>
 </body>
 
 </html>

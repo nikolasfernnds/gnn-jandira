@@ -13,9 +13,11 @@
     --amarelo-ouro: #FFC107;
     --amarelo-favo: #C4A13E;
     --preto-transparente: #40000000;
+    
     --bg-color: #16212B;
     --bg-body: #0E1921;
     --bg-modal: #16212B;
+    --bg-ocorrencia: #1E2A38;
     --bg-input: rgba(0, 0, 0, 0.3);
 
     --default-gradient: linear-gradient(90deg, rgba(22, 33, 43, 0.95) 50%, rgba(25, 41, 57, 0.95) 50%);
@@ -25,7 +27,7 @@
             rgba(22, 33, 43, 0.95) 100%);
 
     --default-shadow: 0px 4px 12px #40000000;
-
+    --ocorrencia-shadow: -5px 5px 4px rgba(0, 0, 0, 0.5);
 
     --text-white: #ffffff;
     --text-gray: #b0b0b0;
