@@ -10,7 +10,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const bodyParserJSON = bodyParser.json()
 
-const usuarioRoutes = require('./src/routes/usuarioRoutes.js')
+const usuarioRoutes = require('./src/routes/usuario/usuarioRoutes.js')
 
 const PORT = process.env.PORT || 8080
 const app = express()

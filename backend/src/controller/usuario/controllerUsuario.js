@@ -5,7 +5,7 @@
  *  Versão: 1.0
  *****************************************************************************/
 
-const usuarioDao = require('../../model/DAO/usuario.js')
+const usuarioDao = require('../../model/DAO/usuario/usuario.js')
 const defaultMessages = require('../modulo/configMessages.js')
 
 const listarUsuarios = async function() {

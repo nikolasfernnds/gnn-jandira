@@ -7,7 +7,7 @@
 
 const express = require('express')
 const router = express.Router()
-const controllerUsuario = require('../controller/usuario/controllerUsuario.js')
+const controllerUsuario = require('../../controller/usuario/controllerUsuario.js')
 
 router.get('/', async (req, res) => {
     let usuario = await controllerUsuario.listarUsuarios()
