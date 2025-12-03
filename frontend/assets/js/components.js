@@ -23,7 +23,6 @@ const DEVELOPERS_DATA = [
 
 const LINKS = [
     { text: 'Início', href: '../../pages/home/index.html' },
-    { text: 'Notícias', href: '../../pages/home/index.html#noticias' },
     { text: 'Ocorrências', href: '../../pages/ocorrencias/index.html' },
     { text: 'Perfil', href: '../../pages/perfil/index.html' },
     { text: 'Sair', href: '../../pages/login/index.html', style: 'color: var(--status-vermelho)' }
@@ -74,16 +73,22 @@ function toggleNavbar() {
     const ul = document.createElement('ul')
     ul.classList.add('menu-list')
 
-    LINKS.forEach(item => {
+   LINKS.forEach(link => {
         const li = document.createElement('li')
         const a = document.createElement('a')
         
-        a.textContent = item.text
-        a.href = item.href
+        a.textContent = link.text
+        a.href = link.href
         a.classList.add('menu-link')
-        
-        if (item.style) {
-            a.style = item.style
+
+        const caminhoAtual = window.location.pathname
+
+        if (a.pathname === caminhoAtual) {
+            a.classList.add('active')
+        }
+
+        if (link.style) {
+            a.style = link.style
         }
 
         li.appendChild(a)

@@ -134,10 +134,19 @@ header img {
     display: block;
     padding: 8px 0;
     transition: color 0.2s;
+    border-left: 3px solid transparent; 
+    padding-left: 16px; 
 }
 
 .menu-link:hover {
     color: var(--amarelo-favo);
+}
+
+.menu-link.active {
+    color: var(--amarelo-favo); 
+    font-weight: bold;
+    border-left: 3px solid var(--amarelo-favo); 
+    background: linear-gradient(90deg, rgba(255, 193, 7, 0.1) 0%, transparent 100%); 
 }
 
 .main-footer {
