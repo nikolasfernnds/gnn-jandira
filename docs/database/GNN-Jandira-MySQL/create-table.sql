@@ -5,7 +5,6 @@ USE gnn_jandira;
 -- # SGBD ALVO: MySQL 8.0+ (InnoDB)                #
 -- #################################################
 
--- 1. TABELAS DE SUPORTE
 -- -------------------------------------------------
 
 CREATE TABLE tbl_status (
@@ -24,8 +23,6 @@ CREATE TABLE tbl_categoria_noticia (
     nome_categoria VARCHAR(80) NOT NULL
 );
 
-
--- 2. ENDEREÇOS
 -- -------------------------------------------------
 
 CREATE TABLE tbl_endereco_usuario (
@@ -48,8 +45,6 @@ CREATE TABLE tbl_endereco_ocorrencia (
     ponto_referencia VARCHAR(200) NULL
 );
 
-
--- 3. ENTIDADES PRINCIPAIS
 -- -------------------------------------------------
 
 CREATE TABLE tbl_usuario (
@@ -94,7 +89,6 @@ CREATE TABLE tbl_noticia (
     FOREIGN KEY (id_categoria_noticia) REFERENCES tbl_categoria_noticia(id_categoria_noticia)
 );
 
--- 4. TABELAS DE RELACIONAMENTO E SUPORTE
 -- -------------------------------------------------
 
 CREATE TABLE tbl_historico_ocorrencia (

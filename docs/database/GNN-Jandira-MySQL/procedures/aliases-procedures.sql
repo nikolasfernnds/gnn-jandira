@@ -1,0 +1,14 @@
+-- ##################################################################
+-- # DOCUMENTAÇÃO DE ALIASES #
+-- ##################################################################
+ 
+-- ALIASES
+-- -------------------------------------------
+-- o: tbl_ocorrencia
+-- n: tbl_noticia
+-- u: tbl_usuario (Também representa 'autor' ou 'denunciante')
+-- s: tbl_status
+-- c: tbl_categoria_ocorrencia / tbl_categoria_noticia
+-- e: tbl_endereco_ocorrencia / tbl_endereco_usuario
+-- h: tbl_historico_ocorrencia
+-- m: tbl_midia_ocorrencia
