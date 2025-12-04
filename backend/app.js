@@ -10,6 +10,9 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 
+const usuarioRoutes = require('./src/routes/usuario/usuarioRoutes.js')
+const enderecoUsuarioRoutes = require('./src/routes/endereco/enderecoUsuarioRoutes.js')
+
 // Retorna a porta do servidor atual ou coloca uma porta local
 const PORT = process.env.PORT || 8080
 
@@ -38,6 +41,7 @@ const usuarioRoutes = require('./src/routes/usuario/usuarioRoutes.js')
 // --- Definição dos Endpoints com prefixo ---
 // Define que todos os endpoints de usuários terão o prefixo '/v1/gnn/usuarios'
 app.use('/v1/gnn/usuarios', usuarioRoutes)
+app.use('/v1/gnn/endereco/usuario', enderecoUsuarioRoutes)
 
 // --- Iniciar Servidor ---
 app.listen(PORT, function () {
