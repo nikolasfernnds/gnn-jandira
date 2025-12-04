@@ -6,7 +6,7 @@
  *****************************************************************************/
 
 const usuarioDao = require('../../model/DAO/usuario/usuario.js')
-const DEFAULT_MESSAGES = require('../modulo/configMESSAGES.js')
+const DEFAULT_MESSAGES = require('../modulo/configMessages.js')
 const bcrypt = require('bcrypt')
 
 const listarUsuarios = async function () {
