@@ -36,12 +36,32 @@ const listarEnderecosPorId = async function(id) {
     let MESSAGES = JSON.parse(JSON.stringify(defaultMessages))
 
     try {
-        if(!isNaN(id) && id != "" && id != null && id > 0)
+        if(!isNaN(id) && id != "" && id != null && id > 0){
+            let resultAddresUsers = await enderecoUsuarioDAO.getSelectAllAddressUsersById(Number(id))
+
+            if(resultAddresUsers){
+                if(resultAddresUsers.length > 0){
+                    MESSAGES.defaultHeader.status = defaultMessages.successRequest.status
+                    MESSAGES.defaultHeader.status_code = defaultMessages.successRequest.status_code
+                    MESSAGES.defaultHeader.itens.endereco = resultAddresUsers
+
+                    return MESSAGES.defaultHeader
+                } else {
+                    return MESSAGES.errorNotFound
+                }
+            } else {
+                return MESSAGES.errorInternalServerModel
+            }
+        } else {
+            MESSAGES.errorRequiredFields.message += '[Id incorreto]'
+            return MESSAGES.errorRequiredFields
+        }
     } catch (error) {
-        
+        return MESSAGES.errorInternalServerController
     }
 }
 
 module.exports = {
-    listarEnderecos
+    listarEnderecos,
+    listarEnderecosPorId
 }

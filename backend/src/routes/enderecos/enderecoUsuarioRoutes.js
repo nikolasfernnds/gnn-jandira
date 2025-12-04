@@ -14,4 +14,9 @@ router.get('/', async (req, res) => {
     res.status(enderecoUsuario.status_code).json(enderecoUsuario)
 })
 
+router.get('/:id', async(req, res) => {
+    let enderecoUsuario = await controllerEnderecoUsuario.listarEnderecosPorId(req.params.id)
+    res.status(enderecoUsuario.status_code).json(enderecoUsuario)
+})
+
 module.exports = router

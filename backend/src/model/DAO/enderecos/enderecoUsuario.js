@@ -36,7 +36,23 @@ const getSelectAllAddressUsersById = async function(id) {
     }
 }
 
+const getSelectLastId = async function() {
+    try {
+        let sql = `SELECT * FROM tbl_endereco_usuario ORDER BY id_enderco_usuario DESC LIMIT 1`
+        let result = await prisma.$queryRawUnsafe(sql)
+
+        if(Array.isArray(result))
+            return Number(result[0].id)
+        else
+            return false
+    } catch (error) {
+        return false
+    }
+}
+
+
 module.exports = {
     getSelectAllAddressUsers,
-    getSelectAllAddressUsersById
+    getSelectAllAddressUsersById,
+    getSelectLastId
 }
