@@ -11,7 +11,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 const usuarioRoutes = require('./src/routes/usuario/usuarioRoutes.js')
-const enderecoUsuarioRoutes = require('./src/routes/endereco/enderecoUsuarioRoutes.js')
+const enderecoUsuarioRoutes = require('./src/routes/enderecos/enderecoUsuarioRoutes.js')
 
 // Retorna a porta do servidor atual ou coloca uma porta local
 const PORT = process.env.PORT || 8080

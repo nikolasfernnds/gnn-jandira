@@ -82,6 +82,12 @@ const ERROR_CONFLICT = {
     message: "Já existe um usuário cadastrado com este E-mail ou Nickname."
 }
 
+const errorRequiredFields = {
+                                status: false,
+                                status_code: 400,
+                                message: 'Não foi possível processar a requisição pois existem campos obrigatórios que devem ser encaminhados e atendidos conforme a documentação'
+                        }
+
 module.exports = {
     DEFAULT_HEADER,
     ERROR_INTERNAL_SERVER_CONTROLLER,
