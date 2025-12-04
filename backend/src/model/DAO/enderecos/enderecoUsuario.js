@@ -22,6 +22,36 @@ const getSelectAllAddressUsers = async function () {
     }
 }
 
+const getSelectAllAddressUsersById = async function(id) {
+    try {
+        let sql = `SELECT * FROM tbl_endereco_usuario WHERE id_endereco_usuario = ${id}`
+        let result = await prisma.$queryRawUnsafe(sql)
+
+        if(Array.isArray(result))
+            return result
+        else
+            return false
+    } catch (error) {
+        return false
+    }
+}
+
+const getSelectLastId = async function() {
+    try {
+        let sql = `SELECT * FROM tbl_endereco_usuario ORDER BY id_enderco_usuario DESC LIMIT 1`
+        let result = await prisma.$queryRawUnsafe(sql)
+
+        if(Array.isArray(result))
+            return Number(result[0].id)
+        else
+            return false
+    } catch (error) {
+        return false
+    }
+}
+
 module.exports = {
-    getSelectAllAddressUsers
+    getSelectAllAddressUsers,
+    getSelectAllAddressUsersById,
+    getSelectLastId
 }
