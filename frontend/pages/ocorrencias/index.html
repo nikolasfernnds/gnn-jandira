@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="../../assets/js/components.js" defer type="module"></script>
+    <script src="../../assets/js/ocorrencias.js" defer type="module"></script>
     <script src="app.js" defer type="module"></script>
     <title>GNN Jandira - Ocorrências</title>
 </head>
@@ -28,350 +29,81 @@
                 <button class="btn-tab" id="btn-minhas">Minhas Ocorrências</button>
             </div>
 
+            
+
             <div id="view-feed" class="lista-ocorrencias">
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-amarelo"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-tag">Iluminação</span>
-                            <span class="card-date">Hoje</span>
-                        </div>
-                        <h3 class="card-title">Lâmpada queimada na praça</h3>
-                        <p class="card-location">Centro</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-verde"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-tag">Via Pública</span>
-                            <span class="card-date">Ontem</span>
-                        </div>
-                        <h3 class="card-title">Buraco tapado na Av. Principal</h3>
-                        <p class="card-location"> Jd. Alvorada</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-amarelo"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-tag">Iluminação</span>
-                            <span class="card-date">Hoje</span>
-                        </div>
-                        <h3 class="card-title">Lâmpada queimada na praça</h3>
-                        <p class="card-location">Centro</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-amarelo"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-tag">Iluminação</span>
-                            <span class="card-date">Hoje</span>
-                        </div>
-                        <h3 class="card-title">Lâmpada queimada na praça</h3>
-                        <p class="card-location">Centro</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-amarelo"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-tag">Iluminação</span>
-                            <span class="card-date">Hoje</span>
-                        </div>
-                        <h3 class="card-title">Lâmpada queimada na praça</h3>
-                        <p class="card-location">Centro</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-amarelo"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-tag">Iluminação</span>
-                            <span class="card-date">Hoje</span>
-                        </div>
-                        <h3 class="card-title">Lâmpada queimada na praça</h3>
-                        <p class="card-location">Centro</p>
-                    </div>
-                </article>
-
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-amarelo"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-tag">Iluminação</span>
-                            <span class="card-date">Hoje</span>
-                        </div>
-                        <h3 class="card-title">Lâmpada queimada na praça</h3>
-                        <p class="card-location">Centro</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-amarelo"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-tag">Iluminação</span>
-                            <span class="card-date">Hoje</span>
-                        </div>
-                        <h3 class="card-title">Lâmpada queimada na praça</h3>
-                        <p class="card-location">Centro</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-amarelo"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-tag">Iluminação</span>
-                            <span class="card-date">Hoje</span>
-                        </div>
-                        <h3 class="card-title">Lâmpada queimada na praça</h3>
-                        <p class="card-location">Centro</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-amarelo"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-tag">Iluminação</span>
-                            <span class="card-date">Hoje</span>
-                        </div>
-                        <h3 class="card-title">Lâmpada queimada na praça</h3>
-                        <p class="card-location">Centro</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-amarelo"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-tag">Iluminação</span>
-                            <span class="card-date">Hoje</span>
-                        </div>
-                        <h3 class="card-title">Lâmpada queimada na praça</h3>
-                        <p class="card-location">Centro</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-amarelo"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-tag">Iluminação</span>
-                            <span class="card-date">Hoje</span>
-                        </div>
-                        <h3 class="card-title">Lâmpada queimada na praça</h3>
-                        <p class="card-location">Centro</p>
-                    </div>
-                </article>
-            </div>
+                </div>
 
             <div id="view-minhas" class="lista-ocorrencias hidden">
-                <h2 class="subtitulo-secao">Minhas Solicitações</h2>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
+                <div class="filtros-container">
+                    <button class="btn-filtro active" id="btn-filtro-todas">Todas</button>
+                    <button class="btn-filtro" id="btn-filtro-ativas">Em Andamento</button>
+                    <button class="btn-filtro" id="btn-filtro-encerradas">Encerradas</button>
+                </div>
+                <div id="container-lista-minhas">
                     </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
-                    </div>
-                </article>
-
-                <article class="card-ocorrencia">
-                    <div class="status-indicator status-vermelho"></div>
-                    <div class="card-content">
-                        <div class="card-header">
-                            <span class="card-protocolo">#4023</span>
-                            <span class="card-date">24/11</span>
-                        </div>
-                        <h3 class="card-title">Lixo acumulado na calçada</h3>
-                        <p class="card-location"> Minha Rua</p>
-                    </div>
-                </article>
             </div>
 
-            <div class="btn-cadastro">
-                <button class="btn-nova-ocorrencia" id="btn-nova-ocorrencia">Cadastrar nova Ocorrência</button>
+            <div id="modal-detalhes-overlay" class="modal-overlay">
+                <div class="modal-box modal-detalhes">
+                    <div class="modal-header">
+                        <h2 id="detalhe-titulo">Carregando...</h2>
+                        <button id="btn-fechar-detalhes" class="btn-close" type="button">✖</button>
+                    </div>
+
+                    <div class="detalhes-body">
+                        <div class="detalhes-meta">
+                            <span id="detalhe-status" class="tag-status">...</span>
+                            <span id="detalhe-data" class="tag-data">...</span>
+                        </div>
+
+                        <div class="detalhe-imagem-container hidden" id="detalhe-img-container">
+                            <img id="detalhe-foto" src="" alt="Foto da ocorrência">
+                        </div>
+
+                        <h3 class="label-detalhe">Descrição</h3>
+                        <p id="detalhe-descricao" class="texto-descricao">...</p>
+
+                        <h3 class="label-detalhe">Localização</h3>
+                        <p id="detalhe-endereco" class="texto-endereco">...</p>
+
+                        <div class="secao-interacao">
+                            <div class="tabs-interacao">
+                                <button class="tab-btn active" id="tab-historico">Histórico</button>
+                                <button class="tab-btn" id="tab-comentarios">Comentários</button>
+                            </div>
+
+                            <div id="painel-historico" class="painel-conteudo">
+                                <ul class="timeline" id="lista-historico"></ul>
+                            </div>
+
+                            <div id="painel-comentarios" class="painel-conteudo hidden">
+                                <div id="lista-comentarios" class="lista-comentarios"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div id="modal-ocorrencia-overlay" class="modal-overlay">
                 <div class="modal-box">
                     <div class="modal-header">
-                        <h2>Nova Ocorrência</h2>
-                        <button id="btn-fechar-modal" class="btn-close" type="button">✖</button>
+                        <h2>Registrar Ocorrência</h2>
+                        <button id="btn-fechar-modal" class="btn-close">✖</button>
                     </div>
 
                     <form class="modal-form">
                         <div class="coluna-foto">
-                            <div class="preview">
-                                <input type="file" id="file-input" class="preview-input" accept="image/*">
-                                <label for="file-input" class="preview-label" id="preview-label">
-                                    <i class="fas fa-camera fa-2x"></i>
-                                    <p>Adicionar Foto</p>
-                                </label>
-                                <img id="image-preview" class="preview-image hidden">
-                            </div>
+                            <label for="file-input" class="preview" id="preview-label">
+                                <span><i class="fas fa-camera"></i> Adicionar Foto</span>
+                            </label>
+                            <img id="image-preview" class="preview-image hidden" src="" alt="Prévia">
+                            <input type="file" id="file-input" class="preview-input" accept="image/*">
                         </div>
 
                         <div class="coluna-campos">
-                            <input type="text" class="input-padrao" placeholder="Título (Ex: Buraco na rua)" id="input-titulo">
+                            <input type="text" class="input-padrao" placeholder="Título (Ex: Buraco na rua)"
+                                id="input-titulo">
 
                             <select class="input-padrao" id="input-tipo">
                                 <option value="" disabled selected>Tipo de Ocorrência...</option>
@@ -382,19 +114,23 @@
                             </select>
 
                             <div class="row-inputs">
-                                <input type="text" class="input-padrao" placeholder="CEP" style="width: 30%;" id="input-cep" maxlength="9">
-                                <input type="text" class="input-padrao" placeholder="Número" style="width: 65%;" id="input-numero">
+                                <input type="text" class="input-padrao" placeholder="CEP" style="width: 30%;"
+                                    id="input-cep" maxlength="9">
+                                <input type="text" class="input-padrao" placeholder="Número" style="width: 65%;"
+                                    id="input-numero">
                             </div>
 
                             <input type="text" class="input-padrao" placeholder="Endereço (Rua)" id="input-logradouro">
-                            
+
                             <div class="row-inputs">
                                 <input type="text" class="input-padrao" placeholder="Bairro" id="input-bairro">
                                 <input type="text" class="input-padrao" placeholder="Cidade" id="input-cidade">
-                                <input type="text" class="input-padrao" placeholder="UF" style="width: 20%;" id="input-uf">
+                                <input type="text" class="input-padrao" placeholder="UF" style="width: 20%;"
+                                    id="input-uf">
                             </div>
 
-                            <input type="text" class="input-padrao" placeholder="Ponto de Referência" id="input-referencia">
+                            <input type="text" class="input-padrao" placeholder="Ponto de Referência"
+                                id="input-referencia">
 
                             <div class="row-inputs">
                                 <input type="date" class="input-padrao" id="input-data">
@@ -407,8 +143,10 @@
 
                             <div class="form-footer">
                                 <div class="buttons">
-                                    <button type="button" class="btn-cancelar btn-tab" id="btn-cancelar">Cancelar</button>
-                                    <button type="button" class="btn-cadastro-ocorrencia btn-tab" id="btn-registrar">Registrar</button>
+                                    <button type="button" class="btn-cancelar btn-tab"
+                                        id="btn-cancelar">Cancelar</button>
+                                    <button type="button" class="btn-cadastro-ocorrencia btn-tab"
+                                        id="btn-registrar">Registrar</button>
                                 </div>
                                 <label class="checkbox-container">
                                     <input type="checkbox" id="check-anonimo"> Denúncia Anônima
@@ -417,6 +155,9 @@
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class="container-nova-ocorrencia">
+                <button class="btn-nova-ocorrencia" id="btn-nova-ocorrencia"> Cadastrar nova Ocorrência</button>
             </div>
 
         </section>
