@@ -33,6 +33,23 @@ const getSelectAllUsers = async function () {
     }
 }
 
+const getSelectUserById = async function (id) {
+    try {
+        let sql = `SELECT * FROM vw_perfil_usuario WHERE id_usuario = ${id}`
+
+        let result = await prisma.$queryRawUnsafe(sql)
+
+        if (result && result.length > 0) {
+            return result[0]
+        } else {
+            return false
+        }
+
+    } catch (error) {
+        return false
+    }
+}
+
 const getSelectLastID = async function () {
     try {
         let sql = `SELECT id_usuario FROM tbl_usuario ORDER BY id_usuario DESC LIMIT 1`
@@ -105,9 +122,9 @@ const setInsertNewUser = async function (user) {
 
 const setUpdateUser = async function (id, user) {
     try {
-        let sql = `CALL sp_atualizar_perfil(${id}, '${user}')`
+        let sql = `CALL sp_atualizar_perfil(${id}, ?)`
         
-        let result = await prisma.$executeRawUnsafe(sql)
+        let result = await prisma.$queryRawUnsafe(sql, user)
 
         return true
 
@@ -137,6 +154,7 @@ module.exports = {
     getSelectAllUsers,
     getSelectUserByNickname,
     getSelectUserByEmail,
+    getSelectUserById,
     getSelectLastID,
     setInsertNewUser,
     setUpdateUser,

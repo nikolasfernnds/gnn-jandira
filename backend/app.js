@@ -25,6 +25,8 @@ app.use((request, response, next) => {
     // Define os verbos HTTP permitidos
     response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
     
+    response.header('Access-Control-Allow-Headers', 'Content-Type') // Adicione isso
+
     // Carrega as configurações no CORS da API
     app.use(cors())
     

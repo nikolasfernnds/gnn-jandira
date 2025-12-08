@@ -55,8 +55,14 @@ function toggleNavbar() {
 
     imgContainer.appendChild(userImg)
 
+    const userStorage = localStorage.getItem('user') 
+    
+    const usuario = userStorage ? JSON.parse(userStorage) : null
+
+    const nomeUsuario = usuario ? usuario.nickname : 'Visitante'
+
     const userName = document.createElement('span')
-    userName.textContent = 'Olá, Usuário'
+    userName.textContent = `Olá, ${nomeUsuario}`
     userName.classList.add('menu-username')
 
     userInfo.appendChild(imgContainer)

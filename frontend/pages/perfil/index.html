@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../../assets/css/components.css" />
   <link rel="stylesheet" href="style.css" />
   <script src="../../assets/js/components.js" defer type="module"></script>
+  <script src="../../assets/js/usuarios.js" defer type="module"></script>
   <script src="app.js" defer type="module"></script>
   <title>GNN Jandira - Perfil</title>
 </head>
@@ -25,10 +26,11 @@
 <input type="file" id="input-foto" accept="image/*" class="hidden" disabled>
       </div>
       <div class="informacao-usuario">
-        <input type="text" id="input-nome" placeholder="Nome de usuário" disabled value="Gabryel Fillipe">
+        <input type="text" id="input-nome" placeholder="Nome de usuário" disabled>
 
-        <input type="text" id="input-email" placeholder="Email" disabled value="gabryel@email.com">
+        <input type="text" id="input-email" placeholder="Email" disabled >
 
+        <input type="text" id="input-telefone" placeholder="Telefone" disabled>
         <div class="row-inputs">
           <input type="date" id="input-nasc" placeholder="Data de nascimento" disabled>
         </div>
@@ -43,6 +45,7 @@
         <div class="row-inputs">
           <input type="text" id="input-bairro" placeholder="Bairro" disabled>
           <input type="text" id="input-cidade" placeholder="Cidade" disabled>
+          <input type="hidden" id="input-uf">
         </div>
 
         <div class="container-acoes">
