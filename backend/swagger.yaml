@@ -280,7 +280,7 @@ paths:
         '400':
           description: Valores inválidos
 
-       delete: 
+      delete: 
       tags:
         - Ocorrências
       summary: Deletar uma ocorrência
