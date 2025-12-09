@@ -10,9 +10,6 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 
-const enderecoUsuarioRoutes = require('./src/routes/enderecos/enderecoUsuarioRoutes.js')
-const noticiaRoutes = require('./src/routes/noticia/noticiaRoutes.js')
-
 // Retorna a porta do servidor atual ou coloca uma porta local
 const PORT = process.env.PORT || 8080
 
@@ -26,6 +23,8 @@ app.use((request, response, next) => {
     // Define os verbos HTTP permitidos
     response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
     
+    response.header('Access-Control-Allow-Headers', 'Content-Type') // Adicione isso
+
     // Carrega as configurações no CORS da API
     app.use(cors())
     
@@ -37,12 +36,14 @@ app.use(bodyParser.json())
 
 // --- Importação dos Arquivos de Rota ---
 const usuarioRoutes = require('./src/routes/usuario/usuarioRoutes.js')
+const enderecoUsuarioRoutes = require('./src/routes/enderecos/enderecoUsuarioRoutes.js')
+const ocorrenciaRoutes = require('./src/routes/ocorrencias/ocorrenciasRoutes.js')
 
 // --- Definição dos Endpoints com prefixo ---
-// Define que todos os endpoints de usuários terão o prefixo '/v1/gnn/usuarios'
+// Define que todos os endpoints de usuários terão o prefixo '/v1/gnn'
 app.use('/v1/gnn/usuarios', usuarioRoutes)
 app.use('/v1/gnn/endereco/usuario', enderecoUsuarioRoutes)
-app.use('/v1/gnn/noticias', noticiaRoutes)
+app.use('/v1/gnn/ocorrencia', ocorrenciaRoutes)
 
 // --- Iniciar Servidor ---
 app.listen(PORT, function () {

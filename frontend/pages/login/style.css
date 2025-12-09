@@ -119,7 +119,7 @@ main{
 }
 
 .input-cadastro{
-    min-width: 230px;
+    width: 90%;
     border: var(--default-border);
     background-color: var(--preto-transparente);
     border-radius: var(--radius-sm);

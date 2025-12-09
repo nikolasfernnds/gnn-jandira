@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../assets/css/components.css">
     <link rel="stylesheet" href="style.css">
     <script src="../../assets/js/components.js" defer type="module"></script>
+    <script src="../../assets/js/usuarios.js" defer type="module"></script>
     <script src="app.js" defer type="module"></script>
     <title>GNN Jandira - Login</title>
 </head>
@@ -20,12 +21,12 @@
     <main id="main">
         <section class="login">
             <div class="login-info">
-                <input type="text" placeholder="Nome de usuario ou e-mail" class="input">
+                <input type="text" placeholder="Nome de usuario ou e-mail" class="input" id="input-login">
                 <div class="password-container">
                     <input type="password" id="login-senha" placeholder="Senha" class="input">
                     <button type="button" id="btn-eye-login" class="btn-eye"></button>
                 </div>
-                <button class="btn-login">Entrar</button>
+                <button class="btn-login" id="btn-entrar">Entrar</button>
             </div>
             <div class="opcoes">
                 <a href="#" id="esqueci-senha">Esqueceu a senha?</a>

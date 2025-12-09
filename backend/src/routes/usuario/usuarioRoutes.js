@@ -31,8 +31,8 @@ router.get('/', cors(), async function (request, response) {
     response.status(usuarios.status_code).json(usuarios)
 })
 
-// Retorna um usuário filtrando pelo ID
-router.get('/:id', cors(), async function (request, response) {
+// Retorna um usuário pelo ID
+router.get('/perfil/:id', cors(), async function (request, response) {
     let idUsuario = request.params.id
     let usuario = await controllerUsuario.buscarUsuario(idUsuario)
     response.status(usuario.status_code).json(usuario)
