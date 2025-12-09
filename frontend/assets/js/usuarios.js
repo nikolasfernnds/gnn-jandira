@@ -22,7 +22,7 @@ export async function autenticarUsuario(login, senha) {
 }
 
 export async function cadastrarUsuario(usuario) {
-    const url = `https://corsproxy.io/?url=https://gnn-jandira.onrender.com/v1/gnn/usuarios/cadastro`
+    const url = `https://gnn-jandira.onrender.com/v1/gnn/usuarios/cadastro`
     const options = {
         method: 'POST',
         headers: {

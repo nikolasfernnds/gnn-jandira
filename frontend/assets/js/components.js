@@ -28,6 +28,27 @@ const LINKS = [
     { text: 'Sair', href: '../../pages/login/index.html', style: 'color: var(--status-vermelho)' }
 ]
 
+const MOCK_NOTIFICACOES = [
+    {
+        titulo: 'Status Atualizado',
+        mensagem: 'Sua ocorrência "Buraco na rua" mudou para "Em Análise".',
+        data: 'Hoje, 14:30',
+        lida: false
+    },
+    {
+        titulo: 'Comentário Respondido',
+        mensagem: 'A prefeitura respondeu ao seu comentário na ocorrência #123.',
+        data: 'Ontem',
+        lida: true
+    },
+    {
+        titulo: 'Ocorrência Finalizada',
+        mensagem: 'A lâmpada da praça foi trocada com sucesso.',
+        data: '05/12/2025',
+        lida: true
+    }
+]
+
 function toggleNavbar() {
     const existingNavbar = document.getElementById('navbar')
 
@@ -38,7 +59,7 @@ function toggleNavbar() {
 
     const nav = document.createElement('nav')
     nav.id = 'navbar'
-    nav.classList.add('sidebar-menu') 
+    nav.classList.add('sidebar-menu')
 
     const menuHeader = document.createElement('div')
     menuHeader.classList.add('menu-header')
@@ -55,8 +76,8 @@ function toggleNavbar() {
 
     imgContainer.appendChild(userImg)
 
-    const userStorage = localStorage.getItem('user') 
-    
+    const userStorage = localStorage.getItem('user')
+
     const usuario = userStorage ? JSON.parse(userStorage) : null
 
     const nomeUsuario = usuario ? usuario.nickname : 'Visitante'
@@ -71,7 +92,7 @@ function toggleNavbar() {
     const btnClose = document.createElement('button')
     btnClose.textContent = '✖'
     btnClose.classList.add('btn-close-menu')
-    btnClose.addEventListener('click', toggleNavbar) 
+    btnClose.addEventListener('click', toggleNavbar)
 
     menuHeader.appendChild(userInfo)
     menuHeader.appendChild(btnClose)
@@ -79,10 +100,10 @@ function toggleNavbar() {
     const ul = document.createElement('ul')
     ul.classList.add('menu-list')
 
-   LINKS.forEach(link => {
+    LINKS.forEach(link => {
         const li = document.createElement('li')
         const a = document.createElement('a')
-        
+
         a.textContent = link.text
         a.href = link.href
         a.classList.add('menu-link')
@@ -127,7 +148,7 @@ function createLink(href, iconSrc, text) {
 }
 
 function createHeader() {
-    const header = document.getElementById('header') 
+    const header = document.getElementById('header')
 
     const perfilIcons = document.createElement('div')
     perfilIcons.classList.add('perfil-icons')
@@ -153,13 +174,30 @@ function createHeader() {
 
     const notifyIcon = document.createElement('img')
     notifyIcon.classList.add('header-icon')
+    notifyIcon.classList.add('notify-icon')
     notifyIcon.src = '../../assets/img/notificaçãoIcon.png'
+
+    notifyIcon.addEventListener('click', () => {
+        const modal = createNotifyModal()
+        createModalArea(modal)
+
+        const buttonCloseModal = document.getElementById('btn-fechar-modal-notificacao')
+        buttonCloseModal.addEventListener('click', () => {
+
+            const overlay = document.getElementById('modal-notify-overlay')
+            if (overlay) {
+                overlay.remove()
+            }
+
+        })
+
+    })
 
     const menuImg = document.createElement('img')
     menuImg.classList.add('header-icon')
     menuImg.src = '../../assets/img/menuIcon.png'
 
-    menuImg.style.cursor = 'pointer' 
+    menuImg.style.cursor = 'pointer'
     menuImg.addEventListener('click', () => {
         toggleNavbar()
     })
@@ -243,6 +281,100 @@ function createFooter() {
     footer.appendChild(sectionCopy)
 
     document.body.appendChild(footer)
+}
+
+function createNotifyModal() {
+
+    let idUsuario = null
+    const userStorage = localStorage.getItem('user')
+    if (userStorage)
+        idUsuario = JSON.parse(userStorage).id_usuario
+
+    console.log(idUsuario)
+
+    const main = document.getElementById('main')
+
+    const modalNotifyOverlay = document.createElement('div')
+    modalNotifyOverlay.classList.add('modal-notify-overlay')
+    modalNotifyOverlay.id = 'modal-notify-overlay'
+
+    const modalNotify = document.createElement('div')
+    modalNotify.classList.add('modal-notificacao')
+
+    modalNotifyOverlay.appendChild(modalNotify)
+    main.appendChild(modalNotifyOverlay)
+
+    return modalNotify
+}
+
+function createNotificationItem(notificacao) {
+    const article = document.createElement('article')
+    article.classList.add('card-notificacao')
+    
+    if (!notificacao.lida) {
+        article.classList.add('nao-lida')
+    }
+
+    const content = document.createElement('div')
+    content.classList.add('notificacao-content')
+
+    const headerNote = document.createElement('div')
+    headerNote.classList.add('notificacao-header')
+
+    const title = document.createElement('h3')
+    title.classList.add('notificacao-titulo')
+    title.textContent = notificacao.titulo
+
+    const date = document.createElement('span')
+    date.classList.add('notificacao-data')
+    date.textContent = notificacao.data
+
+    headerNote.appendChild(title)
+    headerNote.appendChild(date)
+
+    const message = document.createElement('p')
+    message.classList.add('notificacao-mensagem')
+    message.textContent = notificacao.mensagem
+
+    content.appendChild(headerNote)
+    content.appendChild(message)
+    article.appendChild(content)
+
+    return article
+}
+
+function createModalArea(modal) {
+
+    const containerNotify = document.createElement('div')
+    containerNotify.classList.add('container-notificacao')
+
+    const headerContainer = document.createElement('div')
+    headerContainer.classList.add('header-container')
+
+    const headerNotify = document.createElement('h1')
+    headerNotify.textContent = 'Notificações'
+
+    const buttonClose = document.createElement('button')
+    buttonClose.classList.add('btn-close')
+    buttonClose.id = 'btn-fechar-modal-notificacao'
+    buttonClose.textContent = '✖'
+    
+    headerContainer.appendChild(headerNotify)
+    headerContainer.appendChild(buttonClose)
+
+    const notificacoes = document.createElement('div')
+    notificacoes.classList.add('notificacoes')
+
+    MOCK_NOTIFICACOES.forEach(note => {
+        const card = createNotificationItem(note)
+        card.classList.add('carti-notificacao')
+        notificacoes.appendChild(card)
+    })
+
+    containerNotify.appendChild(headerContainer)
+    containerNotify.appendChild(notificacoes)
+    
+    modal.appendChild(containerNotify)
 }
 
 createHeader()
