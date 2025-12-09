@@ -1,108 +1,155 @@
-// Arquivo: src/model/DAO/noticia/noticia.js
+/*****************************************************************************
+ * Objetivo: Arquivo responsável pela integração pelo CRUD de dados do MySQL
+ * para a entidade Notícia (tbl_noticia).
+ * Data: 09/12/2025
+ * Autores: Nicolas dos Santos, Nikolas Fernandes e Gabryel Fillipe
+ * Versão: 1.0
+ ******************************************************************************/
 
-const { PrismaClient } = require('../../../../generated/prisma');
-const prisma = new PrismaClient();
+const { PrismaClient } = require('../../../../generated/prisma')
+const prisma = new PrismaClient()
 
-// R - READ (Listar Todas)
-const getSelectAllNoticias = async () => {
+// Listar todas as notícias
+const getSelectAllNoticias = async function() {
     try {
-        const sql = `CALL sp_listar_noticias()`; 
-        const rsNoticias = await prisma.$queryRawUnsafe(sql);
-        
-        // --- INÍCIO DEBUG ---
-        console.log("-----------------------------------------");
-        console.log("DEBUG: Retorno Bruto do Prisma (rsNoticias):", rsNoticias);
-        console.log("DEBUG: Tipo de rsNoticias[0]:", Array.isArray(rsNoticias[0]) ? 'Array' : typeof rsNoticias[0]);
-        console.log("-----------------------------------------");
-        // --- FIM DEBUG ---
-        
-        // 🎯 CORREÇÃO: Garante que rsNoticias[0] seja retornado se for um array,
-        // caso contrário, retorna um array vazio [].
-        return Array.isArray(rsNoticias[0]) ? rsNoticias[0] : []; 
-        
-    } catch (error) {
-        console.error("Erro no getSelectAllNoticias:", error);
-        return false;
-    }
-};
+        let sql = `SELECT * FROM tbl_noticia ORDER BY data_publicacao DESC`
+        let result = await prisma.$queryRawUnsafe(sql)
 
-// R - READ (Buscar por ID)
-const getSelectByIdNoticia = async (id) => {
+        if(Array.isArray(result))
+            return result
+        else
+            return false
+    } catch (error) {
+        
+        return false
+    }
+}
+
+// Buscar notícia por ID
+const getSelectNoticiaById = async function(id) {
     try {
-        const sql = `CALL sp_buscar_noticia_unica(${id})`; 
-        const rsNoticia = await prisma.$queryRawUnsafe(sql);
-        
-        // Retorna o primeiro objeto de resultados (assume que rsNoticia[0] é o array de resultados).
-        return rsNoticia[0].length ? rsNoticia[0][0] : null; 
-    } catch (error) {
-        console.error("Erro no getSelectByIdNoticia:", error);
-        return false;
-    }
-};
+        let sql = `SELECT * FROM tbl_noticia WHERE id_noticia = ${id}`
+        let result = await prisma.$queryRawUnsafe(sql)
 
-// C - CREATE (Inserir)
-const setInsertNoticia = async (dadosNoticia) => {
+        if(Array.isArray(result))
+            return result
+        else
+            return false
+    } catch (error) {
+        return false
+    }
+}
+
+// Buscar notícia por ID de Categoria
+const getSelectNoticiaByCategory = async function(idCategoria) {
     try {
-        const { id_autor, id_categoria_noticia, titulo, conteudo, data_publicacao, foto_capa } = dadosNoticia;
+        let sql = `SELECT * FROM tbl_noticia WHERE id_categoria_noticia = ${idCategoria}`
+        let result = await prisma.$queryRawUnsafe(sql)
 
-        const sql = `CALL sp_criar_noticia(
-            ${id_autor}, 
-            ${id_categoria_noticia}, 
-            '${titulo}', 
-            '${conteudo}', 
-            '${data_publicacao}', 
-            '${foto_capa}'
-        )`;
-        
-        const result = await prisma.$queryRawUnsafe(sql);
-        // A SP retorna o ID da notícia inserida
-        return result[0].length ? result[0][0] : false; 
+        if(Array.isArray(result))
+            return result
+        else
+            return false
     } catch (error) {
-        console.error("Erro no setInsertNoticia:", error);
-        return false;
+        return false
     }
-};
+}
 
-// U - UPDATE (Atualizar)
-const setUpdateNoticia = async (dadosNoticia) => {
+// Buscar notícia por ID de Autor (Usuário)
+const getSelectNoticiaByAuthor = async function(idAutor) {
     try {
-        const { id, id_categoria_noticia, titulo, conteudo, foto_capa } = dadosNoticia;
-        
-        const sql = `
-            CALL sp_atualizar_noticia(
-                ${id}, 
-                ${id_categoria_noticia}, 
-                '${titulo}', 
-                '${conteudo}', 
-                '${foto_capa}'
-            )
-        `;
-        // Usa $executeRawUnsafe (pois a SP não retorna dados, apenas status)
-        const result = await prisma.$executeRawUnsafe(sql); 
-        return result; 
-    } catch (error) {
-        console.error("Erro no setUpdateNoticia:", error);
-        return false;
-    }
-};
+        let sql = `SELECT * FROM tbl_noticia WHERE id_autor = ${idAutor}`
+        let result = await prisma.$queryRawUnsafe(sql)
 
-// D - DELETE (Deletar)
-const setDeleteNoticia = async (id) => {
-    try {
-        const sql = `CALL sp_deletar_noticia(${id})`; 
-        // Usa $executeRawUnsafe (pois a SP não retorna dados, apenas status)
-        const result = await prisma.$executeRawUnsafe(sql);
-        return result; 
+        if(Array.isArray(result))
+            return result
+        else
+            return false
     } catch (error) {
-        console.error("Erro no setDeleteNoticia:", error);
-        return false;
+        return false
     }
-};
+}
+
+// Buscar o ID da última notícia inserida
+const getSelectLastId = async function() {
+    try {
+        let sql = `SELECT * FROM tbl_noticia ORDER BY id_noticia DESC LIMIT 1`
+
+        let result = await prisma.$queryRawUnsafe(sql)
+
+        if(Array.isArray(result) && result.length > 0)
+            return Number(result[0].id_noticia) 
+        else
+            return false
+    } catch (error) {
+        return false
+    }
+}
+
+// Inserir Notícia
+const setInsertNoticia = async function (noticia) {
+    try {
+
+        const jsonData = JSON.stringify(noticia) 
+        
+        const sql = `CALL sp_criar_noticia('${jsonData}')`
+        const result = await prisma.$queryRawUnsafe(sql)
+
+        if (Array.isArray(result) && result[0]) {
+            return result[0]
+        } else {
+            return false
+        }
+    } catch (error) {
+        return false
+    }
+}
+
+// Atualizar Notícia
+const setUpdateNoticia = async function (id, dadosNoticia) {
+    try {
+        const { id_categoria_noticia, titulo, conteudo, foto_capa } = dadosNoticia;
+
+        let sql = `UPDATE tbl_noticia SET 
+                        id_categoria_noticia = ${id_categoria_noticia},
+                        titulo = '${titulo.replace(/'/g, "''")}',
+                        conteudo = '${conteudo.replace(/'/g, "''")}',
+                        foto_capa = '${foto_capa}'
+                   WHERE id_noticia = ${id}`
+        let result = await prisma.$executeRawUnsafe(sql)
+
+        if(result)
+            return true
+        else
+            return false
+    } catch (error) {
+
+        return false
+    }
+}
+
+// Deletar Notícia
+const setDeleteNoticia = async function(id) {
+    try {
+        let sql = `DELETE from tbl_noticia WHERE id_noticia = ${id}`
+        let result = await prisma.$executeRawUnsafe(sql)
+
+        if(result)
+            return true
+        else    
+            return false
+    } catch (error) {
+        return false
+    }
+}
 
 module.exports = {
     getSelectAllNoticias,
-    getSelectByIdNoticia,
+    getSelectNoticiaById,
+    getSelectNoticiaByCategory,
+    getSelectNoticiaByAuthor,
+    getSelectLastId,
     setInsertNoticia,
     setUpdateNoticia,
     setDeleteNoticia
-};
+}

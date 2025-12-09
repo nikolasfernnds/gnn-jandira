@@ -1,58 +1,68 @@
-// Arquivo: src/routes/noticia/noticiaRoutes.js
+/*******************************************************************************************************************
+ * Objetivo: Arquivo de rotas para os endpoints de Notícias (GNN Jandira)
+ * Autor: Nicolas dos Santos, Nikolas Fernandes e Gabryel Fillipe
+ * Data: 09/12/2025
+ * Versão: 1.0
+ ******************************************************************************************************************/
 
-const express = require('express');
-const router = express.Router();
-const controllerNoticia = require('../../controller/noticia/controllerNoticia.js'); 
-// O caminho do controller foi assumido como correto após os testes anteriores.
+const express = require('express')
+const router = express.Router()
+const cors = require('cors')
 
-// Rotas da API para Notícia. O prefixo '/v1/gnn/noticias' é definido no app.js.
+// Importa o Controller de Notícia
+const controllerNoticia = require('../../controller/noticia/controllerNoticia.js')
 
-// --- ROTAS PÚBLICAS (READ) ---
+router.use(cors())
 
-// R - READ: Listar todas as notícias (GET /v1/gnn/noticias)
-router.get('/', async (req, res) => {
-    const noticias = await controllerNoticia.listarNoticias();
-    res.status(noticias.status_code).json(noticias);
-});
+// GET /v1/gnn/noticias/categoria/:id (Buscar notícias por ID de Categoria)
+router.get('/categoria/:id', async(req, res) => {
+    let noticiasCategoria = await controllerNoticia.buscarNoticiaCategoria(req.params.id)
+    res.status(noticiasCategoria.status_code).json(noticiasCategoria)
+})
 
-// R - READ: Buscar notícia por ID (GET /v1/gnn/noticias/:id)
-// ✅ CORRIGIDO: Usa apenas /:id, pois o prefixo já foi definido no app.js
-router.get('/:id', async (req, res) => {
-    const id = req.params.id;
-    const noticia = await controllerNoticia.buscarNoticiaId(id);
-    res.status(noticia.status_code).json(noticia);
-});
+// GET /v1/gnn/noticias/autor/:id (Buscar notícias por ID de Autor/Usuário)
+router.get('/autor/:id', async(req, res) => {
+    let noticiasAutor = await controllerNoticia.buscarNoticiaAutor(req.params.id)
+    res.status(noticiasAutor.status_code).json(noticiasAutor)
+})
 
 
-// --- ROTAS PROTEGIDAS (APENAS ADMIN/GESTOR) ---
+// POST /v1/gnn/noticias (Criar nova notícia)
+router.post('/', async(req, res) => {
+    // Nota: Removi o id_autor_token daqui pois deve ser injetado via middleware de autenticação
+    let novaNoticia = await controllerNoticia.criarNovaNoticia(req.body, req.headers['content-type'])
+    res.status(novaNoticia.status_code).json(novaNoticia)
+})
 
-// C - CREATE: Inserir nova notícia (POST /v1/gnn/noticias)
-router.post('/', async (req, res) => {
-    const dados = req.body;
-    const contentType = req.headers['content-type'];
-    
-    // Obtém o ID do autor do token (variável fictícia para simular o middleware)
-    const id_autor_token = 1; 
-    
-    const noticia = await controllerNoticia.inserirNoticia(dados, contentType, id_autor_token);
-    res.status(noticia.status_code).json(noticia);
-});
+// GET /v1/gnn/noticias (Listar todas as notícias)
+router.get('/', async(req, res) => {
+    // ⚠️ Nome da função no Controller: listarTodasNoticias
+    let noticias = await controllerNoticia.listarTodasNoticias() 
+    res.status(noticias.status_code).json(noticias)
+})
 
-// U - UPDATE: Atualizar notícia por ID (PUT /v1/gnn/noticias/:id)
+// GET /v1/gnn/noticias/:id (Buscar notícia por ID)
+router.get('/:id', async(req, res) => {
+    let noticia = await controllerNoticia.buscarNoticiaId(req.params.id)
+    res.status(noticia.status_code).json(noticia)
+})
+
+// PUT /v1/gnn/noticias/:id (Atualizar notícia)
 router.put('/:id', async (req, res) => {
-    const id = req.params.id;
-    const dados = req.body;
-    const contentType = req.headers['content-type'];
-    
-    const noticia = await controllerNoticia.atualizarNoticia(dados, id, contentType);
-    res.status(noticia.status_code).json(noticia);
+    let dados = req.body;
+    let id = req.params.id;
+    let contentType = req.headers['content-type'];
+
+    let noticiaAtualizada = await controllerNoticia.atualizarNoticia(dados, id, contentType);
+    res.status(noticiaAtualizada.status_code).json(noticiaAtualizada);
 });
 
-// D - DELETE: Excluir notícia por ID (DELETE /v1/gnn/noticias/:id)
-router.delete('/:id', async (req, res) => {
-    const id = req.params.id;
-    const resultado = await controllerNoticia.excluirNoticia(id);
-    res.status(resultado.status_code).json(resultado);
-});
 
-module.exports = router;
+// DELETE /v1/gnn/noticias/:id (Excluir notícia)
+router.delete('/:id', async(req, res) => {
+    let noticia = await controllerNoticia.excluirNoticia(req.params.id)
+    res.status(noticia.status_code).json(noticia)
+})
+
+
+module.exports = router
