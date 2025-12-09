@@ -21,6 +21,7 @@ main {
     display: flex;
     gap: 16px;
     width: 90%;
+    height: 38px;
     margin-bottom: 16px;
     align-items: center;
     justify-content: center;
@@ -29,12 +30,13 @@ main {
 .btn-tab {
     display: flex;
     width: 50%;
-    height: 50%;
+    height: 38px;
     background-color: transparent;
     border: var(--default-border);
     border-radius: var(--radius-md);
     color: var(--text-white);
-    padding: 8px;
+    padding-inline: var(--padding-sm);
+    padding-block: var(--padding-sm);
     font-weight: bold;
     font-size: 12px;
     cursor: pointer;
@@ -90,6 +92,14 @@ main {
     flex-direction: column;
     gap: 16px;
     scrollbar-width: none;
+}
+
+.lista-minhas-ocorrencias{
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scrollbar-width: none;    
 }
 
 .hidden {
@@ -264,7 +274,7 @@ main {
 }
 
 .secao-interacao {
-    margin-top: 24px;
+    /* margin-top: 24px; */
     border-top: 1px solid var(--default-border);
     padding-top: 16px;
 }
@@ -272,6 +282,7 @@ main {
 .tabs-interacao {
     display: flex;
     gap: 16px;
+    justify-content: space-around;
     margin-bottom: 12px;
     border-bottom: 1px solid #333;
 }
@@ -391,9 +402,10 @@ main {
 
 .btn-filtro {
     background: transparent;
-    border: 1px solid var(--text-gray);
+    border: var(--default-border);
     color: var(--text-gray);
-    padding: 6px 12px;
+    padding-inline: var(--padding-sm);
+    padding-block: var(--padding-sm);
     border-radius: 20px;
     font-size: 12px;
     cursor: pointer;
@@ -407,6 +419,67 @@ main {
     font-weight: bold;
 }
 
+
+
+.tab-btn{
+    background-color: transparent;
+    border: var(--default-border);
+    border-radius: var(--radius-sm);
+    padding-inline: var(--padding-sm);
+    padding-block: 4px;
+    color: var(--text-white);
+    margin-bottom: 8px;
+}
+
+.lista-comentarios{
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    max-height: 30dvh;
+    padding-block: var(--padding-sm);
+    padding-inline: var(--padding-sm);
+    border-radius: var(--radius-md);
+    filter: drop-shadow(var(--ocorrencia-shadow));
+    border: var(--default-border);
+}
+
+.comentario{
+    display: flex;
+    justify-content: space-around;
+}
+
+.comentario-usuario{
+    font-size: 12px;
+    color: var(--amarelo-favo);
+    text-align: left;
+}
+
+.comentario-texto{
+    font-size: 12px;
+}
+
+.comentario-data{
+    font-size: 12px;
+    color: var(--text-gray);
+}
+
+.input-comentario{
+    margin-top: 16px;
+    width: 100%;
+    border-radius: var(--radius-md);
+    border: var(--default-border);
+    filter: drop-shadow(var(--ocorrencia-shadow));
+    padding-inline: var(--padding-sm);
+    padding-block: 4px;
+    background-color: transparent;
+    color: var(--text-white);
+}
+
+.input-comentario::placeholder{
+    color: var(--text-white);
+}
 
 
 @media (min-width:768px) {

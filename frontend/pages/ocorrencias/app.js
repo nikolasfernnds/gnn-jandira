@@ -1,10 +1,10 @@
 'use strict'
 
 import { buscarEndereco } from '../../assets/js/viacep.js'
-import { 
-    listarOcorrencias, 
+import {
+    listarOcorrencias,
     listarOcorrenciasDoUsuario,
-    listarOcorrenciaPeloId 
+    listarOcorrenciaPeloId
 } from '../../assets/js/ocorrencias.js'
 
 const botaoFeed = document.getElementById('btn-feed')
@@ -46,6 +46,7 @@ const painelHistorico = document.getElementById('painel-historico')
 const painelComentarios = document.getElementById('painel-comentarios')
 const tabHistorico = document.getElementById('tab-historico')
 const tabComentarios = document.getElementById('tab-comentarios')
+const inputComentario = document.getElementById('input-comentario')
 
 let minhasOcorrenciasCache = []
 
@@ -109,32 +110,32 @@ function criarItemHistorico(data, texto) {
     const li = criarElemento('li', 'timeline-item')
     const spanData = criarElemento('span', 'timeline-data', data)
     const pTexto = criarElemento('p', 'timeline-texto', texto)
-    
+
     li.append(spanData, pTexto)
     return li
 }
 
 function criarCardOcorrencia(ocorrencia) {
     const card = criarElemento('article', 'card-ocorrencia')
-    
+
     card.addEventListener('click', () => abrirModalDetalhes(ocorrencia.id_ocorrencia))
 
     const divStatus = criarElemento('div', 'status-indicator')
     divStatus.classList.add(obterClasseStatus(ocorrencia.id_status))
-    
+
     const divContent = criarElemento('div', 'card-content')
-    
+
     const divHeader = criarElemento('div', 'card-header')
     const spanTag = criarElemento('span', 'card-tag', obterTextoTipo(ocorrencia.id_categoria_ocorrencia))
     const spanDate = criarElemento('span', 'card-date', formatarData(ocorrencia.data_registro))
     divHeader.append(spanTag, spanDate)
-    
+
     const h3Title = criarElemento('h3', 'card-title', ocorrencia.titulo || 'Sem título')
     const pLocation = criarElemento('p', 'card-location', ocorrencia.bairro || ocorrencia.cidade || 'Localização não informada')
-    
+
     divContent.append(divHeader, h3Title, pLocation)
     card.append(divStatus, divContent)
-    
+
     return card
 }
 
@@ -149,7 +150,7 @@ async function carregarFeed() {
         listaOcorrencias.forEach(oc => {
             fragmento.appendChild(criarCardOcorrencia(oc))
         })
-        
+
         containerFeed.replaceChildren(fragmento)
 
     } catch (erro) {
@@ -162,7 +163,7 @@ async function carregarMinhasOcorrencias() {
     try {
         const userStorage = localStorage.getItem('user')
         if (userStorage) idUsuario = JSON.parse(userStorage).id_usuario
-    } catch (erro) {}
+    } catch (erro) { }
 
     if (!idUsuario) {
         containerListaMinhas.replaceChildren(criarMensagemErro('Faça login para ver suas ocorrências.'))
@@ -199,7 +200,7 @@ function filtrarEExibirMinhas(filtro) {
     }
 
     [btnFiltroTodas, btnFiltroAtivas, btnFiltroEncerradas].forEach(btn => btn.classList.remove('active'))
-    
+
     if (filtro === 'todas') btnFiltroTodas.classList.add('active')
     if (filtro === 'ativas') btnFiltroAtivas.classList.add('active')
     if (filtro === 'encerradas') btnFiltroEncerradas.classList.add('active')
@@ -223,14 +224,16 @@ async function abrirModalDetalhes(id) {
         detalheTitulo.textContent = dados.titulo
         detalheDescricao.textContent = dados.descricao
         detalheData.textContent = formatarData(dados.data_registro)
-        
+
         detalheStatus.textContent = obterTextoStatus(dados.id_status)
-        detalheStatus.className = 'tag-status' 
+        detalheStatus.className = 'tag-status'
         detalheStatus.classList.add(obterClasseStatus(dados.id_status))
         detalheStatus.style.backgroundColor = `var(--${obterClasseStatus(dados.id_status)})`
 
         const enderecoCompleto = `${dados.logradouro}, ${dados.numero} - ${dados.bairro}, ${dados.cidade}`
         detalheEndereco.textContent = enderecoCompleto
+
+
 
         if (dados.imagem_url) {
             detalheFoto.src = dados.imagem_url
@@ -242,6 +245,8 @@ async function abrirModalDetalhes(id) {
 
         const itemCriacao = criarItemHistorico(formatarData(dados.data_registro), 'Ocorrência registrada no sistema.')
         listaHistorico.replaceChildren(itemCriacao)
+
+
 
         modalDetalhesOverlay.classList.add('active')
         document.body.classList.add('no-scroll')
@@ -264,7 +269,7 @@ function abrirModalRegistrar() {
 function fecharModalRegistrar() {
     modalOverlay.classList.remove('active')
     document.body.classList.remove('no-scroll')
-    
+
     const inputs = document.querySelectorAll('.modal-form input, .modal-form select')
     inputs.forEach(input => input.value = '')
     imgPreview.src = ''
@@ -354,6 +359,7 @@ if (tabHistorico) {
 }
 if (tabComentarios) {
     tabComentarios.addEventListener('click', () => {
+        inputComentario.classList.remove('hidden')
         tabComentarios.classList.add('active')
         tabHistorico.classList.remove('active')
         painelComentarios.classList.remove('hidden')

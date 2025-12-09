@@ -6,7 +6,7 @@
  *****************************************************************************/
 
 const usuarioDao = require('../../model/DAO/usuario/usuario.js')
-const DEFAULT_MESSAGES = require('../modulo/configMessages.js')
+const DEFAULT_MESSAGES = require('../modulo/configMESSAGES.js')
 const bcrypt = require('bcrypt')
 
 const listarUsuarios = async function () {
@@ -231,33 +231,6 @@ const excluirUsuario = async function (id) {
     }
 }
 
-const buscarUsuario = async function (id) {
-    let MESSAGES = JSON.parse(JSON.stringify(DEFAULT_MESSAGES))
-
-    try {
-        if (id == '' || id == undefined || isNaN(id)) {
-            return MESSAGES.ERROR_INVALID_ID
-        }
-
-        let dadosUsuario = await usuarioDao.getSelectUserById(id)
-
-        if (dadosUsuario) {
-            delete dadosUsuario.senha_hash
-
-            MESSAGES.DEFAULT_HEADER.status = MESSAGES.SUCESS_REQUEST.status
-            MESSAGES.DEFAULT_HEADER.status_code = MESSAGES.SUCESS_REQUEST.status_code
-            MESSAGES.DEFAULT_HEADER.itens = dadosUsuario
-
-            return MESSAGES.DEFAULT_HEADER
-        } else {
-            return MESSAGES.ERROR_NOT_FOUND
-        }
-
-    } catch (error) {
-        return MESSAGES.ERROR_INTERNAL_SERVER_CONTROLLER
-    }
-}
-
 
 
 const validarDadosUsuario = function (dadosBody, isUpdate = false) {
@@ -293,6 +266,5 @@ module.exports = {
     autenticarUsuario,
     cadastrarUsuario,
     atualizarUsuario,
-    excluirUsuario,
-    buscarUsuario
+    excluirUsuario
 }
