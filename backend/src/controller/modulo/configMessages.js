@@ -13,8 +13,9 @@ const dataAtual = new Date()
 const DEFAULT_HEADER = {
     development: 'Nicolas dos Santos, Nikolas Fernandes, Gabryel Fillipe',
     api_description: 'API para registro de ocorrências',
-    status: Boolean,
-    status_code: Number,
+    // 🎯 CORREÇÃO: Usar valores (false, 500) em vez dos tipos (Boolean, Number)
+    status: false,
+    status_code: 500,
     request_date: dataAtual.toLocaleString(),
     itens: {}
 }
