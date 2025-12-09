@@ -16,51 +16,54 @@
 
 <body>
   <header id="header"></header>
-  <section class="sessao-perfil">
-    <div class="container-perfil">
-      <div class="foto-perfil">
-        <label class="container-foto" id="container-foto-perfil" for="input-foto">
-    <img src="../../assets/img/teste.webp" alt="foto perfil" class="foto" id="img-preview">
-</label>
+  <main id="main">
 
-<input type="file" id="input-foto" accept="image/*" class="hidden" disabled>
-      </div>
-      <div class="informacao-usuario">
-        <input type="text" id="input-nome" placeholder="Nome de usuário" disabled>
+    <section class="sessao-perfil">
+      <div class="container-perfil">
+        <div class="foto-perfil">
+          <label class="container-foto" id="container-foto-perfil" for="input-foto">
+            <img src="../../assets/img/teste.webp" alt="foto perfil" class="foto" id="img-preview">
+          </label>
 
-        <input type="text" id="input-email" placeholder="Email" disabled >
-
-        <input type="text" id="input-telefone" placeholder="Telefone" disabled>
-        <div class="row-inputs">
-          <input type="date" id="input-nasc" placeholder="Data de nascimento" disabled>
+          <input type="file" id="input-foto" accept="image/*" class="hidden" disabled>
         </div>
+        <div class="informacao-usuario">
+          <input type="text" id="input-nome" placeholder="Nome de usuário" disabled>
 
-        <div class="row-inputs row-cep-num">
-          <input type="text" id="input-cep" placeholder="CEP" disabled>
-          <input type="text" id="input-numero" placeholder="Número" disabled>
-        </div>
+          <input type="text" id="input-email" placeholder="Email" disabled>
 
-        <input type="text" id="input-endereco" placeholder="Endereço" disabled>
-
-        <div class="row-inputs">
-          <input type="text" id="input-bairro" placeholder="Bairro" disabled>
-          <input type="text" id="input-cidade" placeholder="Cidade" disabled>
-          <input type="hidden" id="input-uf">
-        </div>
-
-        <div class="container-acoes">
-          <div class="editar" id="btn-editar-container">
-            <button class="btn-editar" id="btn-editar">Editar Perfil</button>
+          <input type="text" id="input-telefone" placeholder="Telefone" disabled>
+          <div class="row-inputs">
+            <input type="date" id="input-nasc" placeholder="Data de nascimento" disabled>
           </div>
-          <div class="acoes-edicao hidden" id="btns-salvar-cancelar">
-            <button class="btn-cancelar" id="btn-cancelar">Cancelar</button>
-            <button class="btn-salvar" id="btn-salvar">Salvar Alterações</button>
+
+          <div class="row-inputs row-cep-num">
+            <input type="text" id="input-cep" placeholder="CEP" disabled>
+            <input type="text" id="input-numero" placeholder="Número" disabled>
+          </div>
+
+          <input type="text" id="input-endereco" placeholder="Endereço" disabled>
+
+          <div class="row-inputs">
+            <input type="text" id="input-bairro" placeholder="Bairro" disabled>
+            <input type="text" id="input-cidade" placeholder="Cidade" disabled>
+            <input type="hidden" id="input-uf">
+          </div>
+
+          <div class="container-acoes">
+            <div class="editar" id="btn-editar-container">
+              <button class="btn-editar" id="btn-editar">Editar Perfil</button>
+            </div>
+            <div class="acoes-edicao hidden" id="btns-salvar-cancelar">
+              <button class="btn-cancelar" id="btn-cancelar">Cancelar</button>
+              <button class="btn-salvar" id="btn-salvar">Salvar Alterações</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-  </section>
+    </section>
+  </main>
 </body>
 
 </html>
