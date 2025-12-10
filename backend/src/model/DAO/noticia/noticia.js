@@ -12,7 +12,7 @@ const prisma = new PrismaClient()
 // Listar todas as notícias
 const getSelectAllNoticias = async function() {
     try {
-        let sql = `SELECT * FROM tbl_noticia ORDER BY data_publicacao DESC`
+        let sql = `SELECT * FROM view_noticias ORDER BY data_publicacao DESC`
         let result = await prisma.$queryRawUnsafe(sql)
 
         if(Array.isArray(result))
@@ -28,7 +28,7 @@ const getSelectAllNoticias = async function() {
 // Buscar notícia por ID
 const getSelectNoticiaById = async function(id) {
     try {
-        let sql = `SELECT * FROM tbl_noticia WHERE id_noticia = ${id}`
+        let sql = `SELECT * FROM view_noticias WHERE id_noticia = ${id}`
         let result = await prisma.$queryRawUnsafe(sql)
 
         if(Array.isArray(result))
@@ -43,7 +43,7 @@ const getSelectNoticiaById = async function(id) {
 // Buscar notícia por ID de Categoria
 const getSelectNoticiaByCategory = async function(idCategoria) {
     try {
-        let sql = `SELECT * FROM tbl_noticia WHERE id_categoria_noticia = ${idCategoria}`
+        let sql = `SELECT * FROM view_noticias WHERE id_categoria_noticia = ${idCategoria}`
         let result = await prisma.$queryRawUnsafe(sql)
 
         if(Array.isArray(result))
@@ -58,7 +58,7 @@ const getSelectNoticiaByCategory = async function(idCategoria) {
 // Buscar notícia por ID de Autor (Usuário)
 const getSelectNoticiaByAuthor = async function(idAutor) {
     try {
-        let sql = `SELECT * FROM tbl_noticia WHERE id_autor = ${idAutor}`
+        let sql = `SELECT * FROM view_noticias WHERE id_autor = ${idAutor}`
         let result = await prisma.$queryRawUnsafe(sql)
 
         if(Array.isArray(result))
@@ -73,7 +73,7 @@ const getSelectNoticiaByAuthor = async function(idAutor) {
 // Buscar o ID da última notícia inserida
 const getSelectLastId = async function() {
     try {
-        let sql = `SELECT * FROM tbl_noticia ORDER BY id_noticia DESC LIMIT 1`
+        let sql = `SELECT * FROM view_noticias ORDER BY id_noticia DESC LIMIT 1`
 
         let result = await prisma.$queryRawUnsafe(sql)
 
