@@ -4,7 +4,8 @@ import { buscarEndereco } from '../../assets/js/viacep.js'
 import {
     listarOcorrencias,
     listarOcorrenciasDoUsuario,
-    listarOcorrenciaPeloId
+    listarOcorrenciaPeloId,
+    criarOcorrencia
 } from '../../assets/js/ocorrencias.js'
 
 const botaoFeed = document.getElementById('btn-feed')

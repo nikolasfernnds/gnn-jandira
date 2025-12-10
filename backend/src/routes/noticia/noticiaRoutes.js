@@ -29,7 +29,6 @@ router.get('/autor/:id', async(req, res) => {
 
 // POST /v1/gnn/noticias (Criar nova notícia)
 router.post('/', async(req, res) => {
-    // Nota: Removi o id_autor_token daqui pois deve ser injetado via middleware de autenticação
     let novaNoticia = await controllerNoticia.criarNovaNoticia(req.body, req.headers['content-type'])
     res.status(novaNoticia.status_code).json(novaNoticia)
 })

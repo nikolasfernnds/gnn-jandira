@@ -31,3 +31,19 @@ export async function listarOcorrenciaPeloTipo(tipoOcorrencia) {
     if (!response.ok) throw new Error(`Erro na API: ${response.status}`)
     return response.json()
 }
+
+export async function criarOcorrencia(ocorrencia) {
+    
+    const url = `https://gnn-jandira.onrender.com/v1/gnn/ocorrencia`
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(ocorrencia)
+    }
+    const response = await fetch(url, options)
+    return response.json()
+
+}

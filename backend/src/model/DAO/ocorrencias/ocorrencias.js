@@ -10,7 +10,7 @@ const prisma = new PrismaClient()
 
 const getSelectAllOccurrences = async function() {
     try {
-        let sql = `SELECT * FROM tbl_ocorrencia`
+        let sql = `SELECT * FROM view_ocorrencias`
         let result = await prisma.$queryRawUnsafe(sql)
 
         if(Array.isArray(result))

@@ -111,11 +111,13 @@ const setInsertNewUser = async function (user) {
     try {
         let sql = `CALL sp_cadastrar_usuario('${user}')`
         
-        await prisma.$executeRawUnsafe(sql)
+        await prisma.$queryRawUnsafe(sql)
 
         return true 
 
     } catch (error) {
+        console.log(error)
+
         return false
     }
 }

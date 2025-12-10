@@ -1,87 +1,97 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="../../assets/img/logo-redonda.png">
-    <link rel="stylesheet" href="../../assets/css/global.css" />
-    <link rel="stylesheet" href="../../assets/css/components.css" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="../../assets/js/components.js" defer type="module"></script>
-    <script src="app.js" defer type="module"></script>
-    <title>GNN Jandira - Home</title>
-  </head>
 
-  <body>
-    <header id="header"></header>
-    <div class="container-navbar" id="container-navbar"></div>
-    <main id="main">
-      <section class="noticia-principal" id="noticia-principal">
-        <article class="container-noticia-principal">
-          <div class="data-badge-hero">25 NOV</div>
-          <h3 class="titulo-noticia">Titulo da noticia</h3>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../../assets/img/logo-redonda.png">
+  <link rel="stylesheet" href="../../assets/css/global.css" />
+  <link rel="stylesheet" href="../../assets/css/components.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="../../assets/js/components.js" defer type="module"></script>
+  <script src="../../assets/js/noticias.js" defer type="module"></script>
+  <script src="app.js" defer type="module"></script>
+  <title>GNN Jandira - Home</title>
+</head>
 
-          <div class="info-noticia">
-            <div class="noticia-img">
-                <img src="../../assets/img/imagem-generica.svg"alt="imagem da noticia"/>
-            </div>
-            <p class="noticia">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-              iaculis ac dolor id commodo. Proin sed arcu vel ex imperdiet
-              ullamcorper. Pellentesque tincidunt suscipit neque, eget sagittis
-              metus mollis quis. Nam enim sapien, dictum sed velit eget, sodales
-              semper nibh. Phasellus convallis dictum odio, eget ornare augue
-              consectetur sit amet. Sed sed neque ullamcorper, tincidunt nisl
-              quis, vestibulum diam. Class aptent
-            </p>
+<body>
+  <header id="header"></header>
+  <div class="container-navbar" id="container-navbar"></div>
+  <main id="main">
+    <section class="noticia-principal" id="noticia-principal">
+      <article class="container-noticia-principal">
+        <div class="data-badge-hero">25 NOV</div>
+        <h3 class="titulo-noticia">Titulo da noticia</h3>
+
+        <div class="info-noticia">
+          <div class="noticia-img">
+            <img src="../../assets/img/imagem-generica.svg" alt="imagem da noticia" />
           </div>
-        </article>
-      </section>
-      <section class="container-noticia" id="container-noticia">
-        <h2 class="titulo-sessao">Noticias em alta</h2>
-        <div class="grid-noticia">
-            <article class="card-noticia">
-                <div class="card-img">
-                  <span class="data-badge-card">25/11</span>
-                    <img src="../../assets/img/imagem-generica.svg" alt="imagem da noticia">
-                </div>
-                <div class="info-card-noticia">
-                    <h3 class="card-noticia-titulo">Titulo da noticia</h3>
-                    <p class="noticia">Lorem ipsum dolor sit amet, consectetur</p>
-                </div>
-            </article>
-            <article class="card-noticia">
-                <div class="card-img">
-                  <span class="data-badge-card">25/11</span>
-                    <img src="../../assets/img/imagem-generica.svg" alt="imagem da noticia">
-                </div>
-                <div class="info-card-noticia">
-                    <h3 class="card-noticia-titulo">Titulo da noticia</h3>
-                    <p class="noticia">Lorem ipsum dolor sit amet, consectetur</p>
-                </div>
-            </article>
-            <article class="card-noticia">
-                <div class="card-img">
-                  <span class="data-badge-card">25/11</span>
-                    <img src="../../assets/img/imagem-generica.svg" alt="imagem da noticia">
-                </div>
-                <div class="info-card-noticia">
-                    <h3 class="card-noticia-titulo">Titulo da noticia</h3>
-                    <p class="noticia">Lorem ipsum dolor sit amet, consectetur</p>
-                </div>
-            </article>
-            <article class="card-noticia">
-                <div class="card-img">
-                  <span class="data-badge-card">25/11</span>
-                    <img src="../../assets/img/imagem-generica.svg" alt="imagem da noticia">
-                </div>
-                <div class="info-card-noticia">
-                    <h3 class="card-noticia-titulo">Titulo da noticia</h3>
-                    <p class="noticia">Lorem ipsum dolor sit amet, consectetur</p>
-                </div>
-            </article>
+          <p class="noticia">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+            iaculis ac dolor id commodo. Proin sed arcu vel ex imperdiet
+            ullamcorper. Pellentesque tincidunt suscipit neque, eget sagittis
+            metus mollis quis. Nam enim sapien, dictum sed velit eget, sodales
+            semper nibh. Phasellus convallis dictum odio, eget ornare augue
+            consectetur sit amet. Sed sed neque ullamcorper, tincidunt nisl
+            quis, vestibulum diam. Class aptent
+          </p>
         </div>
-      </section>
-    </main>
-  </body>
+      </article>
+    </section>
+    <section class="container-noticia" id="container-noticia">
+      <h2 class="titulo-sessao">Noticias em alta</h2>
+      <div class="grid-noticia" id="grid-noticia">
+      </div>
+    </section>
+    <div id="modal-detalhes-overlay" class="modal-overlay">
+      <div class="modal-box modal-detalhes">
+        <div class="modal-header">
+          <h2 id="detalhe-titulo">Carregando...</h2>
+          <button id="btn-fechar-detalhes" class="btn-close" type="button">✖</button>
+        </div>
+
+        <div class="detalhes-body">
+          <div class="detalhes-meta">
+            <span id="detalhe-data" class="tag-data">...</span>
+          </div>
+
+          <div class="detalhe-imagem-container hidden" id="detalhe-img-container">
+            <img id="detalhe-foto" src="" alt="Foto da ocorrência">
+          </div>
+
+          <h3 class="label-detalhe">Descrição</h3>
+          <p id="detalhe-descricao" class="texto-descricao">...</p>
+
+          <div class="secao-interacao">
+            <div id="painel-comentarios" class="painel-conteudo hidden">
+              <div id="lista-comentarios" class="lista-comentarios">
+                <article class="comentario">
+                  <p class="comentario-usuario">user</p>
+                  <p class="comentario-texto">comentarios</p>
+                  <span class="comentario-data">09/12</span>
+                </article>
+                <article class="comentario">
+                  <p class="comentario-usuario">user</p>
+                  <p class="comentario-texto">comentarios</p>
+                  <span class="comentario-data">09/12</span>
+                </article>
+                <article class="comentario">
+                  <p class="comentario-usuario">user</p>
+                  <p class="comentario-texto">comentarios</p>
+                  <span class="comentario-data">09/12</span>
+                </article>
+              </div>
+            </div>
+            <div class="escrever-comentario">
+              <input type="text" class="input-comentario hidden" id="input-comentario"
+                placeholder="Digite seu comentario">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
 </html>
