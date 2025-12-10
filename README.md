@@ -14,5 +14,6 @@ O sistema visa facilitar a comunicação entre os cidadãos e a administração 
 | :--- | :--- | :--- |
 | Nicolas dos Santos | Desenvolvedor Back-End | Implementação do sistema em Node.Js e conexão entre o Banco e o Back (Prisma). |
 | Nikolas Fernandes | Administrador de BD / Gerente de Projeto | Desenvolvimento do Banco de Dados (modelagem MySQL), Planejamento, controle de cronograma e comunicação. |
-| Gabryel Felipe | Desenvolvedor Front-End | Desenvolvimento front-end (responsivo) e integração com o Back-end (API) via nuvem. |
+| Gabryel Fillipe | Desenvolvedor Front-End | Desenvolvimento front-end (responsivo) e integração com o Back-end (API) via nuvem. |
+
 
