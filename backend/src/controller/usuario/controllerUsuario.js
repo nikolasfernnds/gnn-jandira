@@ -155,6 +155,32 @@ const cadastrarUsuario = async function (contentType, usuario) {
     }
 }
 
+const buscarUsuario = async function (id) {
+    let MESSAGES = JSON.parse(JSON.stringify(DEFAULT_MESSAGES))
+
+    try {
+        // Validação do ID
+        if (id == '' || id == undefined || isNaN(id)) {
+            return MESSAGES.ERROR_INVALID_ID
+        }
+
+        let resultUser = await usuarioDao.getSelectUserById(id)
+
+        if (resultUser) {
+            MESSAGES.DEFAULT_HEADER.status = MESSAGES.SUCESS_REQUEST.status
+            MESSAGES.DEFAULT_HEADER.status_code = MESSAGES.SUCESS_REQUEST.status_code
+            MESSAGES.DEFAULT_HEADER.itens = resultUser
+            return MESSAGES.DEFAULT_HEADER
+        } else {
+            return MESSAGES.ERROR_NOT_FOUND
+        }
+
+    } catch (error) {
+        console.log(error)
+        return MESSAGES.ERROR_INTERNAL_SERVER_CONTROLLER
+    }
+}
+
 const atualizarUsuario = async function (id, contentType, usuario) {
 
     let MESSAGES = JSON.parse(JSON.stringify(DEFAULT_MESSAGES))
@@ -263,6 +289,7 @@ const validarDadosUsuario = function (dadosBody, isUpdate = false) {
 }
 module.exports = {
     listarUsuarios,
+    buscarUsuario,
     autenticarUsuario,
     cadastrarUsuario,
     atualizarUsuario,
