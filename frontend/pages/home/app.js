@@ -17,6 +17,12 @@ const detalheImgContainer = document.getElementById('detalhe-img-container')
 const detalheFoto = document.getElementById('detalhe-foto')
 const btnFecharDetalhes = document.getElementById('btn-fechar-detalhes')
 
+const destaqueContainer = document.getElementById('destaque-container')
+const destaqueTitulo = document.getElementById('destaque-titulo')
+const destaqueData = document.getElementById('destaque-data')
+const destaqueImagem = document.getElementById('destaque-imagem')
+const destaqueTexto = document.getElementById('destaque-texto')
+
 function criarElemento(tag, classe, texto = '') {
     const elemento = document.createElement(tag)
     if (classe) elemento.classList.add(classe)
@@ -126,6 +132,26 @@ async function carregarNoticias() {
         containerNoticia.replaceChildren(criarMensagemErro('Não foi possível carregar o feed.'))
     }
 
+
+}
+
+function preencherNoticiaPrincipal(noticia){
+
+    if(!noticia)
+        return
+
+    if (destaqueTitulo)
+        destaqueTitulo.textContent = noticia.titulo
+    if (destaqueData)
+        destaqueData.textContent = formatarData(noticia.data_publicacao)
+    if(destaqueImagem)
+        destaqueImagem.src = '../../assets/img/teste.webp'
+
+    if (destaqueTexto) {
+        const textoOriginal = noticia.conteudo || noticia.descricao || ''
+        const textoResumido = textoOriginal.length > 200 ? textoOriginal.substring(0, 200) + '...' : textoOriginal
+        destaqueTexto.textContent = textoResumido
+    }
 
 }
 
