@@ -113,7 +113,7 @@ const atualizarNotificacao = async function(notificacao, id, contentType) {
        
                if (validarId.status_code == 200) {
 
-                 notificacao.id = Number(id)
+                 notificacao.id_notificacao = Number(id)
                  let result = await notificacaoDAO.setUpdateNotification(notificacao)
        
                  if (result) {

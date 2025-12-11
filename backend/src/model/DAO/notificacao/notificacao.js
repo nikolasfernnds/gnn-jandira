@@ -69,8 +69,8 @@ const setInsertNotification = async function(notificacao) {
 
 const setUpdateNotification = async function(notificacao) {
     try {
-        let sql = `UPDATE tbl_notificacao SET conteudo = '${notificacao.conteudo}
-                    WHERE id_notificacao = ${notificacao.id_notificacao}'`
+        let sql = `UPDATE tbl_notificacao SET conteudo = '${notificacao.conteudo}'
+                    WHERE id_notificacao = ${notificacao.id_notificacao}`
         let result = await prisma.$executeRawUnsafe(sql)
 
         if(result)
@@ -78,6 +78,7 @@ const setUpdateNotification = async function(notificacao) {
         else
             return false
     } catch (error) {
+        console.log(error)
         return false
     }
 }

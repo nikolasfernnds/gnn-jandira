@@ -21,8 +21,9 @@ info:
 servers:
   - url: http://localhost:3000
 
-paths: 
-  /users:
+paths:
+
+  /usuarios:
     get:
       tags:
         - Usuário
@@ -30,331 +31,643 @@ paths:
       responses:
         '200':
           description: Lista de todos os usuários retornada com sucesso
-          content: 
+          content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Usuário'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Usuario'
         '500':
           description: Erro interno do servidor
 
-  /users/{id}:
-    get:
-      tags:
-        - Usuário
-      summary: Lista todos os dados de um usuário filtrando pelo seu Id
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: ID do usuário que está sendo requerido
-      responses:
-        '200': 
-          description: Usuário encontrado
-          content: 
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Usuário'
-        '404':
-          description: Usuário não encontrado
-        '500': 
-          description: Erro interno do servidor
-
+  /usuarios/{id}:
     put:
       tags:
         - Usuário
-      summary: Atualiza o perfil de um Usuário
+      summary: Atualiza o perfil de um usuário
       parameters:
         - name: id
           in: path
           required: true
+          description: ID do usuário que será atualizado
           schema:
             type: integer
-          description: ID do usuário que será atualizado
       requestBody:
         required: true
         content:
           application/json:
             schema:
-             $ref: '#/components/schemas/Usuários'
+              $ref: '#/components/schemas/Usuario'
       responses:
-        '201':
+        '200':
           description: Usuário atualizado com sucesso
-        '404':
-          description: Usuário não encontrado
-        '500': 
-          description: Erro interno do servidor
         '400':
           description: Os campos obrigatórios devem ser preenchidos
-        '415': 
+        '404':
+          description: Usuário não encontrado
+        '415':
           description: O tipo de dados do corpo deve ser JSON
+        '500':
+          description: Erro interno do servidor
 
     delete:
       tags:
-       - Usuário
-      summary: Exclui um usuário pelo Id
+        - Usuário
+      summary: Exclui um usuário pelo ID
       parameters:
         - name: id
           in: path
           required: true
+          description: ID do usuário que será deletado
           schema:
             type: integer
-          description: ID do usuário que será deletado
-      responses: 
-        '201':
+      responses:
+        '200':
           description: Usuário excluído com sucesso
         '404':
           description: Usuário não encontrado
         '500':
           description: Erro interno do servidor
 
-  /users/auth/register:
+  /usuarios/cadastro:
     post:
       tags:
         - Usuário
-      summary: Cadastra um novo usuário 
+      summary: Cadastra um novo usuário
       requestBody:
         required: true
         content:
           application/json:
             schema:
-            $ref: '#/components/schemas/Usuário'
-      responses: 
+              $ref: '#/components/schemas/Usuario'
+      responses:
         '201':
           description: Usuário cadastrado com sucesso
-        '500':
-          description: Erro interno do servidor
         '400':
           description: Os campos obrigatórios devem ser preenchidos
         '415':
           description: O tipo de dados do corpo deve ser JSON
+        '500':
+          description: Erro interno do servidor
 
-  /users/auth/login:
+  /usuarios/login:
     post:
-      tags: 
+      tags:
         - Usuário
-      summary: Valida as credenciais do Usuário
-      requestBody: 
+      summary: Valida as credenciais do usuário
+      requestBody:
         required: true
         content:
           application/json:
             schema:
-            $ref: '#/components/schemas/Usuário'
-      responses: 
-        '201':
-          description: Usuário cadastrado com sucesso
-        '500':
-          description: Erro interno do servidor
-        '400':
-          description: Os campos obrigatórios devem ser preenchidos
-        '415':
-          description: O tipo de dados do corpo deve ser JSON
-
-  /ocorrencias:
-    get:
-      tags: 
-        - Ocorrências
-      summary: Listar todas as ocorrências
-      responses: 
-        '200':
-          description: Lista de ocorrências retornada com sucesso
-          content: 
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Ocorrências'
-        '500':
-          description: Erro interno do servidor
-    
-  /ocorrencias/tipos:
-    get:
-      tags:
-       - Ocorrências
-      summary: Listar todos os tipos de ocorrências
+              $ref: '#/components/schemas/Login'
       responses:
         '200':
-          description: Lista de tipos de ocorrências retornadas com sucesso
-          content: 
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Ocorrências'
-        '404':
-          description: Tipo de ocorrência não encontrado
-        '500':
-          description: Erro interno do servidor
-    
-  /ocorrencias/tipos/{id}:
-    get:
-      tags:
-        - Ocorrências
-      summary: Retorna todos os dados de um tipo de ocorrência
-      parameters: 
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: ID do tipo de ocorrências que está sendo requerida
-      responses:
-        '200':
-          description: Tipo de ocorrência encontrado
-        '404':
-          description: Tipo de ocorrência não encontrado
-        '500':
-          description: Erro interno do servidor
-
-    /ocorrencias/{id}:
-      get:
-        tags:
-          - Ocorrências
-        summary: Retorna todos os dados de uma ocorrência filtrando pelo Id
-        parameters:
-          - name: id
-            in: path
-            required: true
-            schema:
-              type: integer
-            description: ID da ocorrência a ser consultada
-        responses:
-          '200':
-            description: Ocorrência encontrada com sucesso
-            content: 
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Ocorrências'
-          '404':
-            description: Ocorrência não encontrada
-          '500':
-            description: Erro interno do servidor
-
-      post:
-      tags: 
-        - Ocorrências
-      summary: Registra uma nova ocorrência
-      requestBody: 
-        required: true
-        content:
-          application/json:
-            schema:
-            $ref: '#/components/schemas/Ocorrências'
-      responses: 
-        '201':
-          description: Ocorrência registrada com sucesso
-        '500':
-          description: Erro interno do servidor
+          description: Login realizado com sucesso
         '400':
           description: Os campos obrigatórios devem ser preenchidos
+        '401':
+          description: Credenciais inválidas
         '415':
           description: O tipo de dados do corpo deve ser JSON
-        '400':
-          description: Valores inválidos
-
-      patch: 
+        '500':
+          description: Erro interno do servidor
+  
+    /ocorrencias:
+    get:
       tags:
         - Ocorrência
-      summary: Atualizar uma ocorrência
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: ID da ocorrência que será atualizado
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-             $ref: '#/components/schemas/Ocorrências'
-      responses:
-        '201':
-          description: Ocorrência atualizada com sucesso
-        '404':
-          description: Ocorrência não encontrada
-        '500':
-          description: Erro interno do servidor
-        '400':
-          description: Os campos obrigatórios devem ser preenchidos
-        '415':
-          description: O tipo de dados do corpo deve ser JSON
-        '400':
-          description: Valores inválidos
-
-      delete: 
-      tags:
-        - Ocorrências
-      summary: Deletar uma ocorrência
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: ID da ocorrência que será deletada
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-             $ref: '#/components/schemas/Ocorrências'
-      responses:
-        '201':
-          description: Ocorrência excluída com sucesso
-        '404':
-          description: Ocorrência não encontrada
-        '500':
-          description: Erro interno do servidor
-        '400':
-          description: Os campos obrigatórios devem ser preenchidos
-        '415':
-          description: O tipo de dados do corpo deve ser JSON
-        '400':
-          description: Valores inválidos
-    
-  /ocorrencias/{idOcorrencia}/usuario/{idUsuario}:
-    get:
-      tags:
-        - Ocorrências
-      summary: Retorna todos os dados de uma ocorrência de um usuário.
-      parameters: 
-        - name: idOcorrencia
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: ID da ocorrência que será consultada
-        - name: idUsuario
-          in: path
-          required: true
-          schema:
-            type: integer
-          description: ID do usuário vinculado a ocorrência
+      summary: Lista todas as ocorrências registradas
       responses:
         '200':
-          description: Ocorrência encontrada com sucesso
-          content: 
+          description: Lista de todas as ocorrências
+          content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Ocorrências'
-        '404':
-          description: Um dos campos não existe
+                type: array
+                items:
+                  $ref: '#/components/schemas/OcorrenciaCompleta'
+        '500':
+          description: Erro interno do servidor
+
+    post:
+      tags:
+        - Ocorrência
+      summary: Registra uma nova ocorrência
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NovaOcorrencia'
+      responses:
+        '201':
+          description: Ocorrência criada com sucesso
         '400':
-          description: Valores inválidos
+          description: Campos obrigatórios ausentes
+        '415':
+          description: O corpo precisa estar no formato JSON
+        '500':
+          description: Erro interno do servidor
+
+  /ocorrencias/{id}:
+    get:
+      tags:
+        - Ocorrência
+      summary: Busca uma ocorrência pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ocorrência encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OcorrenciaCompleta'
+        '404':
+          description: Ocorrência não encontrada
+        '500':
+          description: Erro interno do servidor
+
+  /ocorrencias/categoria/{id}:
+    get:
+      tags:
+        - Ocorrência
+      summary: Lista ocorrências de uma categoria específica
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ocorrências da categoria retornadas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OcorrenciaCompleta'
+        '404':
+          description: Nenhuma ocorrência encontrada
+        '500':
+          description: Erro interno do servidor
+
+  /ocorrencias/usuario/{id}:
+    get:
+      tags:
+        - Ocorrência
+      summary: Lista ocorrências criadas por um usuário específico
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ocorrências encontradas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OcorrenciaCompleta'
+        '404':
+          description: Nenhuma ocorrência encontrada
+        '500':
+          description: Erro interno do servidor
+
+  /ocorrencias/{id}/status:
+    patch:
+      tags:
+        - Ocorrência
+      summary: Atualiza o status de uma ocorrência (somente Admin/Gestor)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AtualizarStatus'
+      responses:
+        '200':
+          description: Status atualizado com sucesso
+        '400':
+          description: Dados inválidos
+        '404':
+          description: Ocorrência não encontrada
+        '500':
+          description: Erro interno do servidor
+
+  /noticia:
+    get:
+      tags:
+        - Notícia
+      summary: Lista todas as notícias publicadas
+      responses:
+        '200':
+          description: Lista de notícias retornada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaNoticias'
+        '500':
+          description: Erro interno do servidor
+
+    post:
+      tags:
+        - Notícia
+      summary: Cadastra uma nova notícia
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoticiaInput'
+      responses:
+        '201':
+          description: Notícia cadastrada com sucesso
+        '400':
+          description: Campos obrigatórios não preenchidos
+        '415':
+          description: O tipo de dados do corpo deve ser JSON
+        '500':
+          description: Erro interno do servidor
+
+  /noticia/{id}:
+    get:
+      tags:
+        - Notícia
+      summary: Retorna uma notícia pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID da notícia
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Dados da notícia retornados com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Noticia'
+        '404':
+          description: Notícia não encontrada
+        '500':
+          description: Erro interno do servidor
+
+    put:
+      tags:
+        - Notícia
+      summary: Atualiza uma notícia existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID da notícia que será atualizada
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoticiaInput'
+      responses:
+        '200':
+          description: Notícia atualizada com sucesso
+        '400':
+          description: Campos obrigatórios não preenchidos
+        '404':
+          description: Notícia não encontrada
+        '415':
+          description: O tipo de dados do corpo deve ser JSON
+        '500':
+          description: Erro interno do servidor
+
+  /notificacao:
+    get:
+      tags:
+        - Notificação
+      summary: Lista todas as notificações
+      responses:
+        '200':
+          description: Lista de notificações retornada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaNotificacoes'
+        '500':
+          description: Erro interno do servidor
+
+    post:
+      tags:
+        - Notificação
+      summary: Cadastra uma nova notificação
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificacaoInput'
+      responses:
+        '201':
+          description: Notificação cadastrada com sucesso
+        '400':
+          description: Campos obrigatórios não preenchidos
+        '415':
+          description: O tipo de dados do corpo deve ser JSON
+        '500':
+          description: Erro interno do servidor
+
+  /notificacao/{id}:
+    get:
+      tags:
+        - Notificação
+      summary: Retorna os dados de uma notificação específica
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID da notificação que será consultada
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Dados da notificação retornados com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notificacao'
+        '404':
+          description: Notificação não encontrada
+        '500':
+          description: Erro interno do servidor
+
+    put:
+      tags:
+        - Notificação
+      summary: Atualiza uma notificação existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID da notificação a ser atualizada
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificacaoInput'
+      responses:
+        '200':
+          description: Notificação atualizada com sucesso
+        '400':
+          description: Campos obrigatórios não preenchidos
+        '404':
+          description: Notificação não encontrada
+        '415':
+          description: O tipo de dados do corpo deve ser JSON
         '500':
           description: Erro interno do servidor
 
 components:
   schemas:
-    Usuários: 
+
+    Usuario:
       type: object
       properties:
-        id:
+        id_usuario:
           type: integer
-          example: 1
-        nome: 
+        nome_completo:
           type: string
-          example: Nicolas
         nickname:
           type: string
-          example: nicolas.d16
-        
+        perfil:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+        senha:
+          type: string
+
+        EnderecoOcorrencia:
+      type: object
+      properties:
+        id_endereco_ocorrencia:
+          type: integer
+        cep:
+          type: string
+        logradouro:
+          type: string
+        bairro:
+          type: string
+        numero:
+          type: string
+        ponto_referencia:
+          type: string
+
+    Ocorrencia:
+      type: object
+      properties:
+        id_ocorrencia:
+          type: integer
+        id_usuario:
+          type: integer
+        id_status:
+          type: integer
+        id_categoria_ocorrencia:
+          type: integer
+        id_endereco_ocorrencia:
+          type: integer
+        titulo:
+          type: string
+        descricao:
+          type: string
+        nivel_ocorrencia:
+          type: string
+        data_registro:
+          type: string
+          format: date-time
+
+    OcorrenciaCompleta:
+      type: object
+      description: Ocorrência com dados completos de endereço, status, categoria e usuário
+      properties:
+        id_ocorrencia:
+          type: integer
+        titulo:
+          type: string
+        descricao:
+          type: string
+        nivel_ocorrencia:
+          type: string
+        data_registro:
+          type: string
+          format: date-time
+        usuario:
+          type: string
+        categoria:
+          type: string
+        status:
+          type: string
+        endereco:
+          $ref: '#/components/schemas/EnderecoOcorrencia'
+
+    NovaOcorrencia:
+      type: object
+      required:
+        - titulo
+        - descricao
+        - id_categoria_ocorrencia
+        - nivel_ocorrencia
+        - cep
+        - logradouro
+        - bairro
+        - numero
+      properties:
+        id_usuario:
+          type: integer
+          nullable: true
+        id_categoria_ocorrencia:
+          type: integer
+        titulo:
+          type: string
+        descricao:
+          type: string
+        nivel_ocorrencia:
+          type: string
+          enum: [baixa, media, alta]
+        cep:
+          type: string
+        logradouro:
+          type: string
+        bairro:
+          type: string
+        numero:
+          type: string
+        ponto_referencia:
+          type: string
+
+    AtualizarStatus:
+      type: object
+      required:
+        - id_status
+        - id_usuario
+      properties:
+        id_status:
+          type: integer
+        id_usuario:
+          type: integer
+
+    Noticia:
+      type: object
+      properties:
+        id_noticia:
+          type: integer
+          example: 2
+        id_autor:
+          type: integer
+          example: 1
+        id_categoria_noticia:
+          type: integer
+          example: 1
+        titulo:
+          type: string
+          example: "Iniciativa Varre-Rua: Moradores se unem pela limpeza"
+        conteudo:
+          type: string
+          example: "Em um esforço conjunto, moradores do bairro Jardim Novo organizaram um mutirão de limpeza..."
+        data_publicacao:
+          type: string
+          format: date-time
+          example: "2025-12-10T07:44:08.000Z"
+        foto_capa:
+          type: string
+          example: "https://storage.gnn.com/capa_limpeza_bairro.jpg"
+
+    NoticiaInput:
+      type: object
+      required:
+        - id_autor
+        - id_categoria_noticia
+        - titulo
+        - conteudo
+        - foto_capa
+      properties:
+        id_autor:
+          type: integer
+          example: 1
+        id_categoria_noticia:
+          type: integer
+          example: 1
+        titulo:
+          type: string
+          example: "Novo projeto de arborização é iniciado no centro"
+        conteudo:
+          type: string
+          example: "A prefeitura iniciou um novo projeto para ampliar áreas verdes..."
+        foto_capa:
+          type: string
+          example: "https://storage.gnn.com/capa_arborizacao.jpg"
+
+    ListaNoticias:
+      type: object
+      properties:
+        noticia:
+          type: array
+          items:
+            $ref: '#/components/schemas/Noticia'
+
+    Notificacao:
+      type: object
+      properties:
+        id_notificacao:
+          type: integer
+          example: 3
+        conteudo:
+          type: string
+          example: "Sua ocorrência foi resolvida com sucesso!"
+        data_envio:
+          type: string
+          format: date-time
+          example: "2025-12-10T08:05:07.000Z"
+
+    NotificacaoInput:
+      type: object
+      required:
+        - conteudo
+      properties:
+        conteudo:
+          type: string
+          example: "Sua solicitação foi processada."
+
+    ListaNotificacoes:
+      type: object
+      properties:
+        notificacao:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notificacao'
