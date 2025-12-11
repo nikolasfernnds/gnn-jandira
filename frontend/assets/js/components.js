@@ -1,6 +1,6 @@
 'use strict'
 
-import { listarNotificacao, listarNotificacaoPeloId } from "./notificacao.js"
+import { listarNotificacao, listarNotificacaoPeloId, listarNotificacoesDoUsuario } from "./notificacao.js"
 
 const DEVELOPERS_DATA = [
     {
@@ -196,7 +196,7 @@ function createHeader() {
 
     notifyIcon.addEventListener('click', () => {
         const modal = createNotifyModal()
-        createModalArea(modal) 
+        createModalArea(modal)
     })
 
     const menuImg = document.createElement('img')
@@ -382,18 +382,50 @@ async function createModalArea(modal) {
     const notificacoes = document.createElement('div')
     notificacoes.classList.add('notificacoes')
 
-    const jsonUser = localStorage.getItem('user')
-    const usuarioLogado = JSON.parse(jsonUser)
-    const id = usuarioLogado.id_usuario
+    try {
+        const userStorage = localStorage.getItem('user')
+        const usuario = userStorage ? JSON.parse(userStorage) : null
 
-    const resposta = await listarNotificacaoPeloId(id)
-    const listanotificacoes = resposta.itens?.notificacao || []
+        if (!usuario || !usuario.id_usuario) {
+            const msgLogin = document.createElement('p')
+            msgLogin.textContent = 'Faça login para ver suas notificações.'
+            msgLogin.style.color = '#ccc'
+            msgLogin.style.padding = '20px'
+            msgLogin.style.textAlign = 'center'
 
-    listanotificacoes.forEach(notificacao => {
-        const card = createNotificationItem(notificacao)
-        card.classList.add('carti-notificacao')
-        notificacoes.appendChild(card)
-    })
+            notificacoes.appendChild(msgLogin)
+        } else {
+            const resposta = await listarNotificacoesDoUsuario(usuario.id_usuario)
+
+            const lista = resposta.itens?.notificacao || resposta.notificacao || []
+            console.log(lista)
+
+            if (lista.length === 0) {
+                const msgVazia = document.createElement('p')
+                msgVazia.textContent = 'Nenhuma notificação nova.'
+                msgVazia.style.color = '#ccc'
+                msgVazia.style.padding = '20px'
+                msgVazia.style.textAlign = 'center'
+
+                notificacoes.appendChild(msgVazia)
+            } else {
+                lista.forEach(notificacao => {
+                    const card = createNotificationItem(notificacao)
+                    notificacoes.appendChild(card)
+                })
+            }
+        }
+    } catch (error) {
+        console.error("Erro ao carregar notificações", error)
+
+        const msgErro = document.createElement('p')
+        msgErro.textContent = 'Erro ao carregar.'
+        msgErro.style.color = 'var(--status-vermelho)' 
+        msgErro.style.padding = '20px'
+        msgErro.style.textAlign = 'center'
+
+        notificacoes.appendChild(msgErro)
+    }
 
     containerNotify.appendChild(headerContainer)
     containerNotify.appendChild(notificacoes)

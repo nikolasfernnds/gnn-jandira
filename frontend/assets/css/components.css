@@ -243,7 +243,7 @@ header img {
 
 .modal-notificacao{
     width: 90%;
-    height: auto;
+    min-height: 50dvh;
     background-color: var(--bg-modal);
     padding-inline: var(--padding-md);
     padding-block: var(--padding-md);
