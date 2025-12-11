@@ -337,6 +337,14 @@ header img {
     color: var(--text-gray);
 }
 
+.notification-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; 
+}
+
 .notificacao-mensagem {
     font-size: 16px;
     color: var(--text-gray);
@@ -345,8 +353,8 @@ header img {
 
 .notification-badge {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: 0;
+    right: 0;
     background-color: #ff3b30; 
     color: white;
     font-size: 0.7rem;
