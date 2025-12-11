@@ -67,6 +67,18 @@
                         <h3 class="label-detalhe">Localização</h3>
                         <p id="detalhe-endereco" class="texto-endereco">...</p>
 
+                        <div id="painel-gestao" class="painel-gestao hidden">
+                            <label class="label-detalhe">Alterar Status (Gestor)</label>
+                            <div class="gestao-controls">
+                                <select id="select-novo-status" class="input-padrao-gestao">
+                                    <option value="1">Pendente</option>
+                                    <option value="2">Em Análise</option>
+                                    <option value="3">Resolvido</option>
+                                </select>
+                                <button id="btn-atualizar-status" class="btn-gestao">Salvar</button>
+                            </div>
+                        </div>
+
                         <div class="secao-interacao">
                             <div class="tabs-interacao">
                                 <button class="tab-btn active" id="tab-historico">Histórico</button>

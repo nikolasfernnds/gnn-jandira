@@ -94,12 +94,12 @@ main {
     scrollbar-width: none;
 }
 
-.lista-minhas-ocorrencias{
+.lista-minhas-ocorrencias {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    scrollbar-width: none;    
+    scrollbar-width: none;
 }
 
 .hidden {
@@ -421,7 +421,7 @@ main {
 
 
 
-.tab-btn{
+.tab-btn {
     background-color: transparent;
     border: var(--default-border);
     border-radius: var(--radius-sm);
@@ -431,7 +431,7 @@ main {
     margin-bottom: 8px;
 }
 
-.lista-comentarios{
+.lista-comentarios {
     background-color: var(--primary-color);
     display: flex;
     flex-direction: column;
@@ -445,27 +445,27 @@ main {
     border: var(--default-border);
 }
 
-.comentario{
+.comentario {
     display: flex;
     justify-content: space-around;
 }
 
-.comentario-usuario{
+.comentario-usuario {
     font-size: 12px;
     color: var(--amarelo-favo);
     text-align: left;
 }
 
-.comentario-texto{
+.comentario-texto {
     font-size: 12px;
 }
 
-.comentario-data{
+.comentario-data {
     font-size: 12px;
     color: var(--text-gray);
 }
 
-.input-comentario{
+.input-comentario {
     margin-top: 16px;
     width: 100%;
     border-radius: var(--radius-md);
@@ -477,11 +477,65 @@ main {
     color: var(--text-white);
 }
 
-.input-comentario::placeholder{
+.input-comentario::placeholder {
     color: var(--text-white);
 }
 
-@media (max-width: 480px){
+.painel-gestao {
+    background-color: var(--preto-transparente);
+    padding: 12px;
+    border-radius: 8px;
+    border: var(--default-border);
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
+.label-detalhe{
+    color: var(--amarelo-ouro);
+}
+
+.gestao-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.input-padrao-gestao {
+    flex: 1;
+    background-color: var(--preto-transparente);
+    border: 1px solid var(--text-gray);
+    color: var(--text-white);
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.input-padrao-gestao option {
+    background-color: var(--bg-modal);
+    color: var(--text-white); 
+    padding: 10px;
+}
+
+.input-padrao-gestao option:checked,
+.input-padrao-gestao option:hover {
+    background-color: var(--amarelo-favo);
+    color: var(--text-black);
+}
+
+.btn-gestao {
+    background-color: var(--amarelo-favo);
+    color: var(--text-black);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-gestao:hover {
+    filter: brightness(0.9);
+}
+
+@media (max-width: 480px) {
     .btn-container {
         flex-direction: column;
         height: auto;

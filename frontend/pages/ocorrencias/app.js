@@ -5,7 +5,8 @@ import {
     listarOcorrencias,
     listarOcorrenciasDoUsuario,
     listarOcorrenciaPeloId,
-    criarOcorrencia
+    criarOcorrencia,
+    atualizarStatusOcorrencia
 } from '../../assets/js/ocorrencias.js'
 
 const botaoFeed = document.getElementById('btn-feed')
@@ -48,6 +49,10 @@ const painelComentarios = document.getElementById('painel-comentarios')
 const tabHistorico = document.getElementById('tab-historico')
 const tabComentarios = document.getElementById('tab-comentarios')
 const inputComentario = document.getElementById('input-comentario')
+
+const painelGestao = document.getElementById('painel-gestao')
+const selectNovoStatus = document.getElementById('select-novo-status')
+const btnAtualizarStatus = document.getElementById('btn-atualizar-status')
 
 let minhasOcorrenciasCache = []
 
@@ -118,8 +123,10 @@ function criarItemHistorico(data, texto) {
 
 function criarCardOcorrencia(ocorrencia) {
     const card = criarElemento('article', 'card-ocorrencia')
+    card.id = `card-ocorrencia-${ocorrencia.id_ocorrencia}`
 
     card.addEventListener('click', () => abrirModalDetalhes(ocorrencia.id_ocorrencia))
+    console.log(ocorrencia)
 
     const divStatus = criarElemento('div', 'status-indicator')
     divStatus.classList.add(obterClasseStatus(ocorrencia.id_status))
@@ -222,37 +229,58 @@ async function abrirModalDetalhes(id) {
         const resposta = await listarOcorrenciaPeloId(id)
         const dados = resposta.itens?.ocorrencia?.[0] || resposta.itens?.ocorrencia || resposta
 
+        if (!dados) throw new Error('Dados não encontrados')
+
         detalheTitulo.textContent = dados.titulo
         detalheDescricao.textContent = dados.descricao
         detalheData.textContent = formatarData(dados.data_registro)
-
+        
         detalheStatus.textContent = obterTextoStatus(dados.id_status)
         detalheStatus.className = 'tag-status'
         detalheStatus.classList.add(obterClasseStatus(dados.id_status))
         detalheStatus.style.backgroundColor = `var(--${obterClasseStatus(dados.id_status)})`
 
-        const enderecoCompleto = `${dados.logradouro}, ${dados.numero} - ${dados.bairro}, ${dados.cidade}`
-        detalheEndereco.textContent = enderecoCompleto
+        const rua = dados.logradouro || 'Rua não informada'
+        const num = dados.numero || 'S/N'
+        const bairro = dados.bairro || 'Bairro não informado'
+        const cidade = dados.cidade || 'Jandira'
+        detalheEndereco.textContent = `${rua}, ${num} - ${bairro}, ${cidade}`
 
-
-
-        if (dados.imagem_url) {
-            detalheFoto.src = dados.imagem_url
+        if (dados.imagem_url || dados.foto_ocorrencia) {
+            detalheFoto.src = dados.imagem_url || dados.foto_ocorrencia
             detalheImgContainer.classList.remove('hidden')
         } else {
             detalheFoto.src = ''
             detalheImgContainer.classList.add('hidden')
         }
 
-        const itemCriacao = criarItemHistorico(formatarData(dados.data_registro), 'Ocorrência registrada no sistema.')
-        listaHistorico.replaceChildren(itemCriacao)
-
-
+        const user = JSON.parse(localStorage.getItem('user') || '{}')
+        const painelGestao = document.getElementById('painel-gestao') 
+        
+        if (user.perfil === 'admin') {
+            painelGestao.classList.remove('hidden')
+            
+            const selectNovoStatus = document.getElementById('select-novo-status')
+            selectNovoStatus.value = dados.id_status
+            
+            const btnSalvarAtual = document.getElementById('btn-atualizar-status')
+            
+            if (btnSalvarAtual) {
+                const novoBotao = btnSalvarAtual.cloneNode(true)
+                btnSalvarAtual.parentNode.replaceChild(novoBotao, btnSalvarAtual)
+                
+                novoBotao.addEventListener('click', () => salvarNovoStatus(id))
+            }
+            
+        } else {
+            painelGestao.classList.add('hidden')
+        }
 
         modalDetalhesOverlay.classList.add('active')
         document.body.classList.add('no-scroll')
 
     } catch (erro) {
+        console.error(erro)
         alert('Erro ao carregar detalhes.')
     }
 }
@@ -329,6 +357,100 @@ async function buscarCepAoSairDoFoco() {
     }
 }
 
+async function salvarNovoStatus(idOcorrencia) {
+    const selectNovoStatus = document.getElementById('select-novo-status')
+    const btnSalvar = document.getElementById('btn-atualizar-status') 
+    
+    if (!selectNovoStatus) return
+
+    const novoStatusId = selectNovoStatus.value
+    
+    const mapaStatus = {
+        '1': { texto: 'Pendente', classe: 'status-pendente', cor: 'var(--status-vermelho)' },
+        '2': { texto: 'Em Análise', classe: 'status-em-analise', cor: 'var(--status-amarelo)' },
+        '3': { texto: 'Resolvido', classe: 'status-resolvido', cor: 'var(--status-verde)' }
+    }
+
+    const userStorage = localStorage.getItem('user')
+    const idUsuarioLogado = userStorage ? JSON.parse(userStorage).id_usuario : 1 
+
+    if (btnSalvar) {
+        btnSalvar.textContent = 'Salvando...'
+        btnSalvar.disabled = true
+    }
+
+    try {
+        const resultado = await atualizarStatusOcorrencia(idOcorrencia, novoStatusId, idUsuarioLogado)
+
+        if (resultado) { 
+            alert('Status atualizado com sucesso!')
+            
+            
+            const infoStatus = mapaStatus[novoStatusId]
+            if (detalheStatus && infoStatus) {
+                detalheStatus.textContent = infoStatus.texto
+                detalheStatus.className = 'tag-status ' + infoStatus.classe
+                detalheStatus.style.backgroundColor = infoStatus.cor
+            }
+
+            const cardNaLista = document.getElementById(`card-ocorrencia-${idOcorrencia}`)
+            
+            if (cardNaLista) {
+                const statusDoCard = cardNaLista.querySelector('.status-indicator') || cardNaLista.querySelector('.tag-status')
+
+                if (statusDoCard) {
+                    statusDoCard.textContent = infoStatus.texto
+                    
+                    statusDoCard.classList.remove('status-pendente', 'status-em-analise', 'status-resolvido')
+                    statusDoCard.classList.add(infoStatus.classe)
+                    
+                    statusDoCard.style.backgroundColor = infoStatus.cor
+                }
+            }
+
+            if (typeof carregarFeed === 'function') carregarFeed()
+            if (typeof carregarMinhasOcorrencias === 'function') carregarMinhasOcorrencias()
+
+             fecharModalDetalhes() 
+
+        } else {
+            alert('Erro ao atualizar status na API.')
+        }
+    } catch (error) {
+        console.error(error)
+        alert('Erro de comunicação.')
+    } finally {
+        if (btnSalvar) {
+            btnSalvar.textContent = 'Salvar'
+            btnSalvar.disabled = false
+        }
+    }
+}
+
+function ativarAbaHistorico() {
+    tabHistorico.classList.add('active')
+    tabComentarios.classList.remove('active')
+
+    painelHistorico.classList.remove('hidden')
+    painelComentarios.classList.add('hidden')
+
+    if (inputComentario) {
+        inputComentario.classList.add('hidden')
+    }
+}
+
+function ativarAbaComentarios() {
+    tabHistorico.classList.remove('active')
+    tabComentarios.classList.add('active')
+
+    painelHistorico.classList.add('hidden')
+    painelComentarios.classList.remove('hidden')
+
+    if (inputComentario) {
+        inputComentario.classList.remove('hidden')
+    }
+}
+
 if (botaoFeed) botaoFeed.addEventListener('click', exibirFeed)
 if (botaoMinhas) botaoMinhas.addEventListener('click', exibirMinhas)
 
@@ -350,22 +472,7 @@ if (btnFiltroTodas) btnFiltroTodas.addEventListener('click', () => filtrarEExibi
 if (btnFiltroAtivas) btnFiltroAtivas.addEventListener('click', () => filtrarEExibirMinhas('ativas'))
 if (btnFiltroEncerradas) btnFiltroEncerradas.addEventListener('click', () => filtrarEExibirMinhas('encerradas'))
 
-if (tabHistorico) {
-    tabHistorico.addEventListener('click', () => {
-        tabHistorico.classList.add('active')
-        tabComentarios.classList.remove('active')
-        painelHistorico.classList.remove('hidden')
-        painelComentarios.classList.add('hidden')
-    })
-}
-if (tabComentarios) {
-    tabComentarios.addEventListener('click', () => {
-        inputComentario.classList.remove('hidden')
-        tabComentarios.classList.add('active')
-        tabHistorico.classList.remove('active')
-        painelComentarios.classList.remove('hidden')
-        painelHistorico.classList.add('hidden')
-    })
-}
+if (tabHistorico) tabHistorico.addEventListener('click', ativarAbaHistorico)
+if (tabComentarios) tabComentarios.addEventListener('click', ativarAbaComentarios)
 
 document.addEventListener('DOMContentLoaded', carregarFeed)

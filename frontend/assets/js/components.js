@@ -175,7 +175,7 @@ function createHeader() {
     gnnLogo.classList.add('logo-icon')
     gnnLogo.src = '../../assets/img/logoGNNJandira.png'
     gnnLogo.addEventListener('click', () => {
-        window.location.href = '../../pages/perfil/index.html'
+        window.location.href = '../../pages/home/index.html'
     })
 
 

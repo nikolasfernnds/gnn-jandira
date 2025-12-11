@@ -21,7 +21,7 @@ app.use((request, response, next) => {
     // Permite que qualquer origem acesse a API
     response.header('Access-Control-Allow-Origin', '*')
     // Define os verbos HTTP permitidos
-    response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+    response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
     
     response.header('Access-Control-Allow-Headers', 'Content-Type') // Adicione isso
 
