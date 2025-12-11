@@ -28,7 +28,7 @@ const getNotificationsByUser = async function (idUsuario) {
             WHERE nu.id_usuario = ${idUsuario};
         `
 
-        const result = await prisma.$queryRawUnsafe(sql)
+        let result = await prisma.$queryRawUnsafe(sql)
 
         if (Array.isArray(result))
             return result
@@ -60,7 +60,7 @@ const getNotificationUserById = async function (id) {
             WHERE nu.id_notificacao_usuario = ${id};
         `
 
-        const result = await prisma.$queryRawUnsafe(sql)
+        let result = await prisma.$queryRawUnsafe(sql)
 
         if (Array.isArray(result))
             return result
@@ -79,7 +79,7 @@ const setInsertNotificationUser = async function (notificacao) {
             INSERT INTO tbl_notificacao_usuario (id_notificacao, id_usuario)
             VALUES (${notificacao.id_notificacao}, ${notificacao.id_usuario});
         `
-        const result = await prisma.$executeRawUnsafe(sql)
+        let result = await prisma.$executeRawUnsafe(sql)
 
         return result
     } catch (error) {
@@ -96,7 +96,7 @@ const setMarkAsRead = async function (id) {
             WHERE id_notificacao_usuario = ${id};
         `
 
-        const result = await prisma.$executeRawUnsafe(sql)
+        let result = await prisma.$executeRawUnsafe(sql)
 
         return result
     } catch (error) {

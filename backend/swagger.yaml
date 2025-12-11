@@ -446,6 +446,95 @@ paths:
         '500':
           description: Erro interno do servidor
 
+  /notificacao-usuario/usuario/{id_usuario}:
+    get:
+      tags:
+        - Notificação Usuário
+      summary: Lista todas as notificações vinculadas ao usuário informado
+      parameters:
+        - name: id_usuario
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID do usuário que receberá suas notificações
+      responses:
+        '200':
+          description: Lista de notificações do usuário retornada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificacaoUsuarioList'
+        '404':
+          description: Nenhuma notificação encontrada para este usuário
+        '500':
+          description: Erro interno do servidor
+
+  /notificacao-usuario/{id_notificacao_usuario}:
+    get:
+      tags:
+        - Notificação Usuário
+      summary: Retorna uma notificação específica vinculada a um usuário
+      parameters:
+        - name: id_notificacao_usuario
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID da notificação_usuario
+      responses:
+        '200':
+          description: Notificação encontrada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotificacaoUsuario'
+        '404':
+          description: Notificação não encontrada
+        '500':
+          description: Erro interno do servidor
+
+  /notificacao-usuario:
+    post:
+      tags:
+        - Notificação Usuário
+      summary: Cria um vínculo entre usuário e notificação
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NotificacaoUsuarioCreate'
+      responses:
+        '201':
+          description: Notificação vinculada ao usuário com sucesso
+        '400':
+          description: Campos obrigatórios inválidos
+        '415':
+          description: O corpo da requisição deve ser JSON
+        '500':
+          description: Erro interno do servidor
+
+  /notificacao-usuario/{id_notificacao_usuario}/lida:
+    patch:
+      tags:
+        - Notificação Usuário
+      summary: Marca a notificação vinculada ao usuário como lida
+      parameters:
+        - name: id_notificacao_usuario
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID da notificação_usuario
+      responses:
+        '200':
+          description: Notificação marcada como lida
+        '404':
+          description: Notificação não encontrada
+        '500':
+          description: Erro interno do servidor
+
 components:
   schemas:
 
@@ -671,3 +760,40 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Notificacao'
+
+    NotificacaoUsuarioCreate:
+      type: object
+      required:
+        - id_notificacao
+        - id_usuario
+      properties:
+        id_notificacao:
+          type: integer
+          example: 3
+        id_usuario:
+          type: integer
+          example: 7
+
+    NotificacaoUsuario:
+      type: object
+      properties:
+        id_notificacao_usuario:
+          type: integer
+          example: 12
+        id_notificacao:
+          type: integer
+          example: 3
+        id_usuario:
+          type: integer
+          example: 7
+        lida:
+          type: boolean
+          example: false
+
+    NotificacaoUsuarioList:
+      type: object
+      properties:
+        notificacoes:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotificacaoUsuario'
