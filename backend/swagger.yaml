@@ -535,6 +535,337 @@ paths:
         '500':
           description: Erro interno do servidor
 
+  /comentario:
+    get:
+      tags:
+        - Comentário
+      summary: Lista todos os comentários
+      responses:
+        '200':
+          description: Lista de comentários retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comentario'
+        '500':
+          description: Erro interno do servidor
+
+    post:
+      tags:
+        - Comentário
+      summary: Cadastra um novo comentário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComentarioInput'
+      responses:
+        '201':
+          description: Comentário criado com sucesso
+        '400':
+          description: Campos obrigatórios não preenchidos
+        '415':
+          description: O tipo de dados do corpo deve ser JSON
+        '500':
+          description: Erro interno do servidor
+
+  /comentario/{id}:
+    get:
+      tags:
+        - Comentário
+      summary: Busca um comentário pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do comentário
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Comentário encontrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comentario'
+        '404':
+          description: Comentário não encontrado
+        '500':
+          description: Erro interno do servidor
+
+    put:
+      tags:
+        - Comentário
+      summary: Atualiza um comentário existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do comentário que será atualizado
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComentarioInput'
+      responses:
+        '200':
+          description: Comentário atualizado com sucesso
+        '400':
+          description: Campos obrigatórios não preenchidos
+        '404':
+          description: Comentário não encontrado
+        '415':
+          description: O tipo de dados do corpo deve ser JSON
+        '500':
+          description: Erro interno do servidor
+
+    delete:
+      tags:
+        - Comentário
+      summary: Exclui um comentário pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do comentário que será deletado
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Comentário excluído com sucesso
+        '404':
+          description: Comentário não encontrado
+        '500':
+          description: Erro interno do servidor
+
+  /comentario-noticia:
+    get:
+      tags:
+        - Comentário Notícia
+      summary: Lista todos os comentários vinculados às notícias
+      responses:
+        '200':
+          description: Lista de comentários/notícia retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ComentarioNoticia'
+        '404':
+          description: Nenhum registro encontrado
+        '500':
+          description: Erro interno do servidor
+
+    post:
+      tags:
+        - Comentário Notícia
+      summary: Cadastra um novo comentário vinculado a uma notícia
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComentarioNoticiaInput'
+      responses:
+        '201':
+          description: Comentário vinculado com sucesso
+        '400':
+          description: Campos obrigatórios não preenchidos
+        '415':
+          description: O tipo de dados do corpo deve ser JSON
+        '500':
+          description: Erro interno do servidor
+
+  /comentario-noticia/{id}:
+    get:
+      tags:
+        - Comentário Notícia
+      summary: Busca um comentário de notícia pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do comentário-notícia
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Registro encontrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComentarioNoticia'
+        '404':
+          description: Comentário-notícia não encontrado
+        '500':
+          description: Erro interno do servidor
+
+    put:
+      tags:
+        - Comentário Notícia
+      summary: Atualiza um comentário vinculado à notícia existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do comentário-notícia
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComentarioNoticiaInput'
+      responses:
+        '200':
+          description: Comentário de notícia atualizado com sucesso
+        '400':
+          description: Campos obrigatórios não preenchidos
+        '404':
+          description: Comentário-notícia não encontrado
+        '415':
+          description: O tipo de dados do corpo deve ser JSON
+        '500':
+          description: Erro interno do servidor
+
+    delete:
+      tags:
+        - Comentário Notícia
+      summary: Exclui um comentário de notícia pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do comentário-notícia
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Comentário de notícia excluído com sucesso
+        '404':
+          description: Comentário-notícia não encontrado
+        '500':
+          description: Erro interno do servidor
+
+  /comentario-ocorrencia:
+    get:
+      tags:
+        - Comentário Ocorrência
+      summary: Lista todos os comentários vinculados às ocorrências
+      responses:
+        '200':
+          description: Lista de comentários de ocorrência retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ComentarioOcorrencia'
+        '404':
+          description: Nenhum registro encontrado
+        '500':
+          description: Erro interno do servidor
+
+    post:
+      tags:
+        - Comentário Ocorrência
+      summary: Cadastra um novo comentário vinculado a uma ocorrência
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComentarioOcorrenciaInput'
+      responses:
+        '201':
+          description: Comentário vinculado à ocorrência criado com sucesso
+        '400':
+          description: Campos obrigatórios não preenchidos
+        '415':
+          description: O tipo de dados do corpo deve ser JSON
+        '500':
+          description: Erro interno do servidor
+
+  /comentario-ocorrencia/{id}:
+    get:
+      tags:
+        - Comentário Ocorrência
+      summary: Busca um comentário de ocorrência pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do comentário de ocorrência
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Registro encontrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComentarioOcorrencia'
+        '404':
+          description: Comentário de ocorrência não encontrado
+        '500':
+          description: Erro interno do servidor
+
+    put:
+      tags:
+        - Comentário Ocorrência
+      summary: Atualiza um comentário vinculado à ocorrência existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do comentário de ocorrência
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComentarioOcorrenciaInput'
+      responses:
+        '200':
+          description: Comentário de ocorrência atualizado com sucesso
+        '400':
+          description: Campos obrigatórios não preenchidos
+        '404':
+          description: Comentário de ocorrência não encontrado
+        '415':
+          description: O tipo de dados do corpo deve ser JSON
+        '500':
+          description: Erro interno do servidor
+
+    delete:
+      tags:
+        - Comentário Ocorrência
+      summary: Exclui um comentário de ocorrência pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do comentário de ocorrência
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Comentário de ocorrência excluído com sucesso
+        '404':
+          description: Comentário de ocorrência não encontrado
+        '500':
+          description: Erro interno do servidor
+
 components:
   schemas:
 
@@ -797,3 +1128,97 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/NotificacaoUsuario'
+
+    Comentario:
+      type: object
+      properties:
+        id_comentario:
+          type: integer
+        id_usuario:
+          type: integer
+        id_ocorrencia:
+          type: integer
+        comentario:
+          type: string
+        data_comentario:
+          type: string
+          format: date-time
+
+    ComentarioInput:
+      type: object
+      required:
+        - id_usuario
+        - id_ocorrencia
+        - comentario
+      properties:
+        id_usuario:
+          type: integer
+        id_ocorrencia:
+          type: integer
+        comentario:
+          type: string
+
+    ComentarioNoticia:
+      type: object
+      properties:
+        id_comentario_noticia:
+          type: integer
+        id_noticia:
+          type: integer
+        id_usuario:
+          type: integer
+        id_comentario:
+          type: integer
+        titulo_noticia:
+          type: string
+        nome_usuario:
+          type: string
+        comentario:
+          type: string
+
+    ComentarioNoticiaInput:
+      type: object
+      required:
+        - id_noticia
+        - id_usuario
+        - id_comentario
+      properties:
+        id_noticia:
+          type: integer
+        id_usuario:
+          type: integer
+        id_comentario:
+          type: integer
+
+    ComentarioOcorrencia:
+      type: object
+      properties:
+        id_comentario_ocorrencia:
+          type: integer
+        id_ocorrencia:
+          type: integer
+        id_usuario:
+          type: integer
+        nome_usuario:
+          type: string
+        id_comentario:
+          type: integer
+        conteudo:
+          type: string
+        data_comentario:
+          type: string
+          format: date-time
+
+    ComentarioOcorrenciaInput:
+      type: object
+      required:
+        - id_ocorrencia
+        - id_usuario
+        - id_comentario
+      properties:
+        id_ocorrencia:
+          type: integer
+        id_usuario:
+          type: integer
+        id_comentario:
+          type: integer
