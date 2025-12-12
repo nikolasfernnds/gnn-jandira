@@ -133,7 +133,7 @@ paths:
         '500':
           description: Erro interno do servidor
   
-    /ocorrencias:
+  /ocorrencias: # <-- CORRIGIDO: Nível de indentação e barra inicial.
     get:
       tags:
         - Ocorrência
@@ -562,7 +562,7 @@ components:
         senha:
           type: string
 
-        EnderecoOcorrencia:
+    EnderecoOcorrencia: # <-- CORRIGIDO: Nível de indentação no schema EnderecoOcorrencia
       type: object
       properties:
         id_endereco_ocorrencia:
