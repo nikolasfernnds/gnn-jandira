@@ -5,13 +5,6 @@
  * Versão: 1.0
  ********************************************************************************/
 
-/********************************************************************************
- *  Objetivo: Controller de Comentários
- *  Data: 12/12/2025
- *  Autores: Nicolas dos Santos, Nikolas Fernandes e Gabryel Fillipe
- *  Versão: 1.0
- ********************************************************************************/
-
 const comentarioDAO = require('../../model/DAO/comentario/comentario.js')
 const defaultMessages = require('../modulo/configMessages.js')
 
