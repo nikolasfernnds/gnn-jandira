@@ -50,8 +50,8 @@ export async function listarUsuario(id) {
 }
 
 export async function atualizarUsuario(id, dados) {
-    // const url = `https://gnn-jandira.onrender.com/v1/gnn/usuarios/${id}`
-    const url = `http://localhost:8080/v1/gnn/usuarios/${id}`
+    const url = `https://gnn-jandira.onrender.com/v1/gnn/usuarios/${id}`
+    // const url = `http://localhost:8080/v1/gnn/usuarios/${id}`
     
     const options = {
         method: 'PUT',
