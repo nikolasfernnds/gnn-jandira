@@ -23,19 +23,41 @@ const getSelectAllOccurrences = async function() {
     }
 } 
 
-const getSelectOccurencesById = async function(id) {
+const getSelectOccurencesById = async function (id) {
     try {
-        let sql = `SELECT * FROM view_ocorrencias WHERE id_ocorrencia = ${id}`
-        let result = await prisma.$queryRawUnsafe(sql)
+        const sql = `CALL sp_buscar_ocorrencia_unica(${id})`
+        const rs = await prisma.$queryRawUnsafe(sql)
 
-        if(Array.isArray(result))
-            return result
-        else
-            return false
+        if (!Array.isArray(rs)) {
+            return []
+        }
+
+        // 🔥 NORMALIZA RESULTADOS
+        const dadosOcorrencia = Array.isArray(rs[0]) && rs[0].length > 0
+            ? rs[0]
+            : []
+
+        const midias = Array.isArray(rs[1]) ? rs[1] : []
+        const historico = Array.isArray(rs[2]) ? rs[2] : []
+
+        if (dadosOcorrencia.length === 0) {
+            return []
+        }
+
+        // 🛡️ garante objeto válido
+        const ocorrencia = { ...dadosOcorrencia[0] }
+
+        ocorrencia.midias = midias
+        ocorrencia.historico = historico
+
+        return [ocorrencia]
+
     } catch (error) {
+        console.error("ERRO DAO getSelectOccurencesById:", error)
         return false
     }
 }
+
 
 const getSelectOccurencesByCategory = async function(id) {
     try {
