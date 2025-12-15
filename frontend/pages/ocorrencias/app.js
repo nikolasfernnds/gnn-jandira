@@ -294,7 +294,7 @@ async function abrirModalDetalhes(id) {
 
                 const spanDate = document.createElement('span')
                 spanDate.classList.add('timeline-date')
-                spanDate.textContent = formatarDataHora(item.data_mudanca)
+                spanDate.textContent = formatarData(item.data_mudanca)
 
                 const pText = document.createElement('p')
                 pText.classList.add('timeline-text')
