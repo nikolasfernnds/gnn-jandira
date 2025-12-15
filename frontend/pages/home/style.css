@@ -408,8 +408,8 @@
     width: 100%;
     padding: 12px;
     border-radius: var(--radius-sm);
-    border: 1px solid #444;
-    background-color: rgba(0, 0, 0, 0.4);
+    border: var(--default-border);
+    background-color: var(--bg-modal);
     color: var(--text-white);
     font-size: 14px;
 }
