@@ -53,12 +53,12 @@ const validarDadosNoticia = async function (dados) {
         MESSAGES.ERROR_REQUIRED_FIELDS.message += "{URL da Foto de Capa inválida}";
         return MESSAGES.ERROR_REQUIRED_FIELDS;
     }
-    
+
     return false; // Retorna false se a validação for bem-sucedida
 };
 
 // Listar Todas (GET /noticias)
-const listarTodasNoticias = async function() {
+const listarTodasNoticias = async function () {
     let MESSAGES = JSON.parse(JSON.stringify(defaultMessages));
 
     try {
@@ -185,10 +185,13 @@ const criarNovaNoticia = async function (noticia, contentType, arquivo) {
 
             if (arquivo) {
                 const urlFoto = await cloudinary.uploadImage(arquivo)
-                
+
                 noticia.foto_capa = urlFoto
                 noticia.imagem_capa = urlFoto
             }
+
+            noticia.id_autor = Number(noticia.id_autor)
+            noticia.id_categoria_noticia = Number(noticia.id_categoria_noticia)
 
             if (!noticia.destaque) noticia.destaque = 0;
 
@@ -221,15 +224,15 @@ const criarNovaNoticia = async function (noticia, contentType, arquivo) {
 }
 
 // Atualizar Notícia
-const atualizarNoticia = async function(dadosNoticia, id, contentType) {
+const atualizarNoticia = async function (dadosNoticia, id, contentType) {
     let MESSAGES = JSON.parse(JSON.stringify(defaultMessages));
 
     try {
         if (String(contentType).toUpperCase() === 'APPLICATION/JSON') {
-            
+
             if (!isNaN(id) && id > 0) {
                 let validar = await validarDadosNoticia(dadosNoticia);
-                
+
                 if (!validar) {
                     let validarId = await buscarNoticiaId(id);
 
@@ -240,7 +243,7 @@ const atualizarNoticia = async function(dadosNoticia, id, contentType) {
                             MESSAGES.DEFAULT_HEADER.status = MESSAGES.SUCESS_REQUEST.status;
                             MESSAGES.DEFAULT_HEADER.status_code = MESSAGES.SUCESS_REQUEST.status_code;
                             MESSAGES.DEFAULT_HEADER.message = 'Notícia atualizada com sucesso.';
-                            MESSAGES.DEFAULT_HEADER.itens.noticia = dadosNoticia; 
+                            MESSAGES.DEFAULT_HEADER.itens.noticia = dadosNoticia;
 
                             return MESSAGES.DEFAULT_HEADER;
 
@@ -267,7 +270,7 @@ const atualizarNoticia = async function(dadosNoticia, id, contentType) {
 }
 
 // Excluir Notícia
-const excluirNoticia = async function(id) {
+const excluirNoticia = async function (id) {
     let MESSAGES = JSON.parse(JSON.stringify(defaultMessages));
 
     try {

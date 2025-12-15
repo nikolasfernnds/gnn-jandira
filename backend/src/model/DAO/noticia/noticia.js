@@ -101,6 +101,7 @@ const setInsertNoticia = async function (noticia) {
             return false
         }
     } catch (error) {
+        console.log(error)
         return false
     }
 }
