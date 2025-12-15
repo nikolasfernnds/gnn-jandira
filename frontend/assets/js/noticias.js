@@ -3,7 +3,7 @@
 export async function listarTodasNoticias() {
 
     const url = `https://gnn-jandira.onrender.com/v1/gnn/noticia`
-    //const url = `http://localhost:8080/v1/gnn/noticia`
+    // const url = `http://localhost:8080/v1/gnn/noticia`
     
     const response = await fetch(url)
     if (!response.ok) throw new Error(`Erro na API: ${response.status}`) // Verifica se deu 404 ou 500
@@ -28,7 +28,7 @@ export async function listarNoticiaPeloId(id) {
 
 export async function cadastrarNovaNoticia(dados) {
     const url = `https://gnn-jandira.onrender.com/v1/gnn/noticia`
-    //const url = `http://localhost:8080/v1/gnn/noticia`
+    // const url = `http://localhost:8080/v1/gnn/noticia`
 
     const options = {
         method: 'POST',

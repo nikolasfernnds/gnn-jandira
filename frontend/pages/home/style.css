@@ -543,9 +543,17 @@
     }
 }
 
+@media (min-width: 1200px) {
+    .grid-noticia {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 @media (min-width: 1440px) {
     main {
         max-width: 1400px;
         margin: 0 auto;
     }
+
+    
 }
