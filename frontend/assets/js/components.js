@@ -428,7 +428,6 @@ async function createModalArea(modal) {
             const resposta = await listarNotificacoesDoUsuario(usuario.id_usuario)
 
             const lista = resposta.itens?.notificacao || resposta.notificacao || []
-            console.log(lista)
 
             if (lista.length === 0) {
                 const msgVazia = document.createElement('p')
@@ -482,7 +481,6 @@ async function atualizarBadgeNotificacao(idUsuario, badgeElement) {
             }
         }
     } catch (error) {
-        console.log('Sem notificações ou erro ao contar')
         badgeElement.style.display = 'none'
     }
 }
