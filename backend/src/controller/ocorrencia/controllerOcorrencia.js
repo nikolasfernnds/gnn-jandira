@@ -44,7 +44,7 @@ const buscarOcorrenciaId = async function (id) {
                 if(resultOcorrencias.length > 0){
                     MESSAGES.DEFAULT_HEADER.status = MESSAGES.SUCESS_REQUEST.status
                     MESSAGES.DEFAULT_HEADER.status_code = MESSAGES.SUCESS_REQUEST.status_code
-                    MESSAGES.DEFAULT_HEADER.itens.ocorrencia = resultOcorrencias
+                    MESSAGES.DEFAULT_HEADER.itens.ocorrencia = resultOcorrencias[0]
 
                     return MESSAGES.DEFAULT_HEADER
                 } else {
