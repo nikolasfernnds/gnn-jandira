@@ -130,16 +130,16 @@ function criarCardOcorrencia(ocorrencia) {
 
     const divImg = criarElemento('div', 'card-img-wrapper')
     const img = document.createElement('img')
-    
+
     if (ocorrencia.foto_ocorrencia) {
         img.src = ocorrencia.foto_ocorrencia
     } else {
         img.src = '../../assets/img/imagem-generica.svg'
     }
-    
+
     img.alt = ocorrencia.titulo
     img.classList.add('card-img-feed')
-    
+
     const spanStatus = criarElemento('span', 'card-status-badge')
     spanStatus.classList.add(obterClasseStatus(ocorrencia.id_status))
     spanStatus.textContent = obterTextoStatus(ocorrencia.id_status)
@@ -158,7 +158,7 @@ function criarCardOcorrencia(ocorrencia) {
     const pLocation = criarElemento('p', 'card-location', ocorrencia.bairro || ocorrencia.cidade || 'Localização não informada')
 
     divContent.append(divHeader, h3Title, pLocation)
-    
+
     card.append(divImg, divContent)
 
     return card
@@ -269,6 +269,54 @@ async function abrirModalDetalhes(id) {
         } else {
             detalheFoto.src = ''
             detalheImgContainer.classList.add('hidden')
+        }
+
+        const listaHistorico = document.getElementById('lista-historico')
+        listaHistorico.textContent = ''
+
+        if (dados.historico && dados.historico.length > 0) {
+
+            dados.historico.forEach(item => {
+
+                const li = document.createElement('li')
+                li.classList.add('timeline-item')
+
+                let corStatus = 'var(--amarelo-favo)'
+                if (item.observacao.includes('Resolvido') || item.observacao.includes('3')) corStatus = 'var(--status-verde)'
+                if (item.observacao.includes('Pendente') || item.observacao.includes('1')) corStatus = 'var(--status-vermelho)'
+
+                const divMarker = document.createElement('div')
+                divMarker.classList.add('timeline-marker')
+                divMarker.style.backgroundColor = corStatus
+
+                const divContent = document.createElement('div')
+                divContent.classList.add('timeline-content')
+
+                const spanDate = document.createElement('span')
+                spanDate.classList.add('timeline-date')
+                spanDate.textContent = formatarDataHora(item.data_mudanca)
+
+                const pText = document.createElement('p')
+                pText.classList.add('timeline-text')
+                pText.textContent = item.observacao
+
+                const smallUser = document.createElement('small')
+                smallUser.classList.add('timeline-user')
+                smallUser.textContent = `Por: ${item.usuario_modificacao_nickname || 'Sistema'}`
+
+                divContent.append(spanDate, pText, smallUser)
+
+                li.append(divMarker, divContent)
+
+                listaHistorico.appendChild(li)
+            })
+
+        } else {
+            const liEmpty = document.createElement('li')
+            liEmpty.classList.add('timeline-empty')
+            liEmpty.textContent = 'Nenhum histórico registrado.'
+
+            listaHistorico.appendChild(liEmpty)
         }
 
         const user = JSON.parse(localStorage.getItem('user') || '{}')
@@ -457,18 +505,6 @@ function ativarAbaHistorico() {
     }
 }
 
-function ativarAbaComentarios() {
-    tabHistorico.classList.remove('active')
-    tabComentarios.classList.add('active')
-
-    painelHistorico.classList.add('hidden')
-    painelComentarios.classList.remove('hidden')
-
-    if (inputComentario) {
-        inputComentario.classList.remove('hidden')
-    }
-}
-
 if (botaoFeed) botaoFeed.addEventListener('click', exibirFeed)
 if (botaoMinhas) botaoMinhas.addEventListener('click', exibirMinhas)
 
@@ -491,7 +527,64 @@ if (btnFiltroAtivas) btnFiltroAtivas.addEventListener('click', () => filtrarEExi
 if (btnFiltroEncerradas) btnFiltroEncerradas.addEventListener('click', () => filtrarEExibirMinhas('encerradas'))
 
 if (tabHistorico) tabHistorico.addEventListener('click', ativarAbaHistorico)
-if (tabComentarios) tabComentarios.addEventListener('click', ativarAbaComentarios)
+    if (tabComentarios && painelComentarios) {
+    
+        tabComentarios.addEventListener('click', () => {
+            if(tabHistorico) tabHistorico.classList.remove('active')
+            tabComentarios.classList.add('active')
+    
+            if(painelHistorico) painelHistorico.classList.add('hidden')
+            painelComentarios.classList.remove('hidden')
+    
+            painelComentarios.textContent = ''
+    
+            const containerAviso = document.createElement('div')
+            containerAviso.style.display = 'flex'
+            containerAviso.style.flexDirection = 'column'
+            containerAviso.style.alignItems = 'center'
+            containerAviso.style.justifyContent = 'center'
+            containerAviso.style.padding = '40px 20px'
+            containerAviso.style.textAlign = 'center'
+            containerAviso.style.height = '100%'
+            containerAviso.style.color = '#ccc'
+    
+            const icone = document.createElement('i')
+            icone.className = 'fas fa-hammer' 
+            icone.style.fontSize = '2.5rem'
+            icone.style.marginBottom = '15px'
+            icone.style.color = 'var(--amarelo-favo)' 
+    
+            const titulo = document.createElement('h3')
+            titulo.textContent = 'Funcionalidade em Desenvolvimento'
+            titulo.style.fontSize = '1.2rem'
+            titulo.style.marginBottom = '10px'
+            titulo.style.color = '#fff'
+    
+            const texto = document.createElement('p')
+            texto.textContent = 'Estamos trabalhando para trazer a melhor experiência de comentários para você. Em breve estará disponível!'
+            texto.style.fontSize = '0.9rem'
+            texto.style.maxWidth = '300px'
+            texto.style.lineHeight = '1.5'
+    
+            containerAviso.appendChild(icone)
+            containerAviso.appendChild(titulo)
+            containerAviso.appendChild(texto)
+    
+            painelComentarios.appendChild(containerAviso)
+            
+            const areaEscrever = document.querySelector('.escrever-comentario')
+            if(areaEscrever) areaEscrever.classList.add('hidden')
+        })
+    }
+if (tabHistorico) {
+    tabHistorico.addEventListener('click', () => {
+        tabComentarios.classList.remove('active')
+        tabHistorico.classList.add('active')
+
+        painelComentarios.classList.add('hidden')
+        if (painelHistorico) painelHistorico.classList.remove('hidden')
+    })
+}
 
 if (btnRegistrar) {
     btnRegistrar.addEventListener('click', async (e) => {
@@ -525,7 +618,7 @@ if (btnRegistrar) {
 
         const formData = new FormData()
 
-        formData.append('id_usuario', idUsuario || 1) 
+        formData.append('id_usuario', idUsuario || 1)
         formData.append('titulo', inputTitulo.value)
         formData.append('descricao', inputTitulo.value)
 
@@ -553,7 +646,7 @@ if (btnRegistrar) {
 
             if (resultado) {
                 alert('Ocorrência registrada com sucesso!')
-                fecharModalRegistrar() 
+                fecharModalRegistrar()
 
                 inputTitulo.value = ''
                 fileInput.value = ''

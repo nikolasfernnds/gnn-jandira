@@ -78,7 +78,7 @@ async function abrirModalDetalhes(id) {
         const dados = resposta.itens?.noticia?.[0] || resposta.itens?.noticia || resposta
 
         detalheTitulo.textContent = dados.titulo
-        detalheDescricao.textContent = dados.conteudo
+        detalheDescricao.textContent = dados.conteudo 
         detalheData.textContent = formatarData(dados.data_publicacao)
         detalheData.classList.add('detalhe-data')
 
@@ -91,12 +91,17 @@ async function abrirModalDetalhes(id) {
             detalheFoto.src = '../../assets/img/teste.webp'
         }
 
+        const elemConteudo = document.getElementById('detalhe-conteudo')
+        if (elemConteudo) elemConteudo.textContent = dados.conteudo
 
+        const containerComentarios = document.getElementById('area-comentarios-noticia')
+        renderizarAvisoEmBreve(containerComentarios)
 
         modalDetalhesOverlay.classList.add('active')
         document.body.classList.add('no-scroll')
 
     } catch (erro) {
+        console.error(erro) 
         alert('Erro ao carregar detalhes.')
     }
 }
@@ -206,10 +211,76 @@ function abrirModal() {
     document.body.classList.add('no-scroll')
 }
 
-function fecharModal() {
-    modalNoticia.classList.remove('active')
-    document.body.classList.remove('no-scroll')
-    limparFormulario()
+function fecharModal(e) {
+    if (e) e.preventDefault()
+
+    if (modalNoticia) {
+        modalNoticia.classList.remove('active')
+        document.body.classList.remove('no-scroll')
+    }
+
+    try {
+        limparFormulario();
+    } catch (erro) {
+        console.warn('Aviso: Não foi possível limpar todos os campos do form.', erro)
+    }
+}
+
+function limparFormulario() {
+    if (inputTitulo) inputTitulo.value = ''
+    if (selectCategoria) selectCategoria.value = ''
+    if (inputConteudo) inputConteudo.value = ''
+    if (fileInput) fileInput.value = ''
+
+    if (imgPreview) {
+        imgPreview.src = ''
+        imgPreview.classList.add('hidden')
+    }
+    if (labelPreview) {
+        labelPreview.style.display = 'flex'
+    }
+}
+
+function renderizarAvisoEmBreve(container) {
+    if (!container) return
+
+    container.textContent = ''
+
+    const avisoBox = document.createElement('div')
+    avisoBox.style.display = 'flex'
+    avisoBox.style.flexDirection = 'column'
+    avisoBox.style.alignItems = 'center'
+    avisoBox.style.justifyContent = 'center'
+    avisoBox.style.padding = '30px 10px'
+    avisoBox.style.backgroundColor = 'rgba(0,0,0,0.2)'
+    avisoBox.style.borderRadius = '8px'
+    avisoBox.style.marginTop = '20px'
+
+    const icone = document.createElement('i')
+    icone.className = 'fas fa-comments'
+    icone.style.fontSize = '2rem'
+    icone.style.marginBottom = '15px'
+    icone.style.color = 'var(--amarelo-favo)'
+    icone.style.opacity = '0.7'
+
+    const titulo = document.createElement('h4')
+    titulo.textContent = 'Comentários da Comunidade'
+    titulo.style.color = '#fff'
+    titulo.style.marginBottom = '8px'
+    titulo.style.fontSize = '1.1rem'
+
+    const texto = document.createElement('p')
+    texto.textContent = 'A funcionalidade de comentários para notícias está sendo preparada. Em breve você poderá debater este assunto aqui!'
+    texto.style.color = '#aaa'
+    texto.style.textAlign = 'center'
+    texto.style.fontSize = '0.9rem'
+    texto.style.maxWidth = '300px'
+
+    avisoBox.appendChild(icone)
+    avisoBox.appendChild(titulo)
+    avisoBox.appendChild(texto)
+
+    container.appendChild(avisoBox)
 }
 
 if (btnAbrirModal) {
@@ -225,17 +296,6 @@ if (btnFecharModal) {
         modalDetalhesOverlay.classList.remove('active')
         document.body.classList.remove('no-scroll')
     })
-}
-
-function limparFormulario() {
-    inputTitulo.value = ''
-    selectCategoria.value = ''
-    inputConteudo.value = ''
-    fileInput.value = ''
-
-    imgPreview.src = ''
-    imgPreview.classList.add('hidden')
-    labelPreview.style.display = 'flex'
 }
 
 if (fileInput) {
@@ -299,8 +359,14 @@ if (btnPublicar) {
     })
 }
 
-if (btnFecharDetalhes) btnFecharDetalhes.addEventListener('click', fecharModalDetalhes)
-if (modalDetalhesOverlay) modalDetalhesOverlay.addEventListener('click', (e) => { if (e.target === modalDetalhesOverlay) fecharModalDetalhes() })
+if (btnFecharDetalhes) btnFecharDetalhes.addEventListener('click', fecharModal)
+if (btnFecharModal) {
+    btnFecharModal.addEventListener('click', fecharModal)
+}
+
+if (btnCancelar) {
+    btnCancelar.addEventListener('click', fecharModal);
+} if (modalDetalhesOverlay) modalDetalhesOverlay.addEventListener('click', (e) => { if (e.target === modalDetalhesOverlay) fecharModalDetalhes() })
 
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -15,6 +15,7 @@ main{
     border: var(--modal-border);
     border-radius: var(--radius-md);
     width: 90dvw;
+    max-width: 900px;
     margin-block: var(--default-padding);
     min-height: 250px;
     background: var(--overlay-gradient);
@@ -89,6 +90,7 @@ main{
 
 .modal-cadastro{
     width: 90%;
+    max-width: 900px;
     height: auto;
     background-color: var(--primary-color);
     top: 16px;

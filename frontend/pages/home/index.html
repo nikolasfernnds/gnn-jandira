@@ -54,7 +54,7 @@
       <div class="modal-box modal-grande">
         <div class="modal-header">
           <h2>Publicar Notícia</h2>
-          <button id="btn-fechar-noticia" class="btn-close">✖</button>
+          <button id="btn-fechar-noticia" class="btn-close" type="button">✖</button>
         </div>
 
         <form class="modal-form" id="form-noticia">
@@ -113,31 +113,15 @@
           <h3 class="label-detalhe">Descrição</h3>
           <p id="detalhe-descricao" class="texto-descricao">...</p>
 
-          <div class="secao-interacao">
-            <div id="painel-comentarios" class="painel-conteudo hidden">
-              <div id="lista-comentarios" class="lista-comentarios">
-                <article class="comentario">
-                  <p class="comentario-usuario">user</p>
-                  <p class="comentario-texto">comentarios</p>
-                  <span class="comentario-data">09/12</span>
-                </article>
-                <article class="comentario">
-                  <p class="comentario-usuario">user</p>
-                  <p class="comentario-texto">comentarios</p>
-                  <span class="comentario-data">09/12</span>
-                </article>
-                <article class="comentario">
-                  <p class="comentario-usuario">user</p>
-                  <p class="comentario-texto">comentarios</p>
-                  <span class="comentario-data">09/12</span>
-                </article>
-              </div>
-            </div>
-            <div class="escrever-comentario">
-              <input type="text" class="input-comentario hidden" id="input-comentario"
-                placeholder="Digite seu comentario">
+          <div class="modal-body">
+            <p id="detalhe-conteudo" class="texto-noticia"></p>
+
+            <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;">
+
+            <div id="area-comentarios-noticia" >
             </div>
           </div>
+
         </div>
       </div>
     </div>

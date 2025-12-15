@@ -25,30 +25,33 @@ const getSelectAllOccurrences = async function() {
 
 const getSelectOccurencesById = async function (id) {
     try {
-        const sql = `CALL sp_buscar_ocorrencia_unica(${id})`
-        const rs = await prisma.$queryRawUnsafe(sql)
+        const sqlPrincipal = `SELECT * FROM view_ocorrencias WHERE id_ocorrencia = ${id}`
+        const rsPrincipal = await prisma.$queryRawUnsafe(sqlPrincipal)
 
-        if (!Array.isArray(rs)) {
+        if (!Array.isArray(rsPrincipal) || rsPrincipal.length === 0) {
             return []
         }
 
-        // 🔥 NORMALIZA RESULTADOS
-        const dadosOcorrencia = Array.isArray(rs[0]) && rs[0].length > 0
-            ? rs[0]
-            : []
+        const ocorrencia = { ...rsPrincipal[0] }
 
-        const midias = Array.isArray(rs[1]) ? rs[1] : []
-        const historico = Array.isArray(rs[2]) ? rs[2] : []
+        const sqlMidias = `SELECT url_arquivo FROM tbl_midia_ocorrencia WHERE id_ocorrencia = ${id}`
+        const rsMidias = await prisma.$queryRawUnsafe(sqlMidias)
+        ocorrencia.midias = Array.isArray(rsMidias) ? rsMidias : []
 
-        if (dadosOcorrencia.length === 0) {
-            return []
-        }
-
-        // 🛡️ garante objeto válido
-        const ocorrencia = { ...dadosOcorrencia[0] }
-
-        ocorrencia.midias = midias
-        ocorrencia.historico = historico
+        const sqlHistorico = `
+            SELECT 
+                h.observacao,
+                h.data_mudanca,
+                s.nome_status AS status_anterior,
+                u.nickname AS usuario_modificacao_nickname
+            FROM tbl_historico_ocorrencia AS h
+            INNER JOIN tbl_status AS s ON h.id_status = s.id_status
+            LEFT JOIN tbl_usuario AS u ON h.id_usuario = u.id_usuario
+            WHERE h.id_ocorrencia = ${id}
+            ORDER BY h.data_mudanca DESC
+        `
+        const rsHistorico = await prisma.$queryRawUnsafe(sqlHistorico)
+        ocorrencia.historico = Array.isArray(rsHistorico) ? rsHistorico : []
 
         return [ocorrencia]
 
